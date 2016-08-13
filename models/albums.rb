@@ -13,6 +13,10 @@ class Album
     return DbInterface.update( TABLE, self )
   end
 
+  def destroy()
+    return self.destroy(@id)
+  end
+
   def initialize( options )
     @id = options['id'].to_i
     @name = options['name']
@@ -34,7 +38,7 @@ class Album
     return albums.map { |a| Album.new( a ) }
   end
 
-  def self.destroy( id )
+  def self.destroy( id = nil )
     DbInterface.delete( TABLE, id )
     return nil
   end

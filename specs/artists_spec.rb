@@ -3,6 +3,10 @@ require('minitest/rg')
 require_relative('../models/artists')
 require_relative('../db/sql_runner')
 
+# Tests for CRUD functionality in the artists model
+# The artist is the simplets model with no dependency on any other table
+# This test should be run first as other test will depend on it.
+
 class TestArtists < Minitest::Test
   # def self.test_order
   #  :alpha
@@ -52,14 +56,14 @@ class TestArtists < Minitest::Test
   end
 
   def test_06_artist_destroy
-    Artist.destroy(@artist1.id)
-    Artist.destroy(@artist2.id)
+    @artist1.destroy()
+    @artist2.destroy()
     artists = Artist.all
     assert_equal(0, artists.count)
   end
 
-  def test_99
-    requests = SqlRunner.requests
-    requests.each { | r | puts r }
-  end
+  # def test_99
+  #   requests = SqlRunner.requests
+  #   requests.each { | r | puts r }
+  # end
 end

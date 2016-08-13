@@ -15,6 +15,10 @@ class Artist
     return DbInterface.update(TABLE, self)
   end
 
+  def destroy()
+    return self.destroy(@id)
+  end
+
   def initialize( options )
     @id = options['id'].to_i
     @name = options['name']
