@@ -55,9 +55,9 @@ class TestArtists < Minitest::Test
     assert_equal(id, artist.id)
   end
 
-  def test_06_artist_destroy
-    @artist1.destroy()
-    @artist2.destroy()
+  def test_06_artist_delete
+    @artist1.delete()
+    @artist2.delete()
     artists = Artist.all
     assert_equal(0, artists.count)
   end

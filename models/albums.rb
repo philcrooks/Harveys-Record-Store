@@ -13,8 +13,9 @@ class Album
     return DbInterface.update( TABLE, self )
   end
 
-  def destroy()
-    return self.destroy(@id)
+  def delete()
+    @id = Album.destroy(@id)
+    return @id
   end
 
   def initialize( options )

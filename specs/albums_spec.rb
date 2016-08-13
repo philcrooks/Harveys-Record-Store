@@ -19,6 +19,11 @@ class TestAlbums < Minitest::Test
     Album.destroy()
 
     # Create some albums for the tests
+    @album1 = Album.new( { "name" => "Abbey Road", "artist_id" => @artist1.id })
+
+    id serial4 primary key,
+    name varchar(255),
+    artist_id int4 references artists(id) on delete cascade
 
   end
 
