@@ -54,13 +54,13 @@ end
 post '/artists/:id' do
   @artist = Artist.new( params )
   @artist.update
-  redirect( to( "/artists/#{@stock.id}" ) )
+  redirect( to( "/artists/#{@artist.id}" ) )
 end
 
 # DELETE
 post '/artists/:id/delete' do
   if Artist.id_range.member?( id )
-    Artist.destroy( params['id'] )
+    Artist.destroy( params['id'].to_i )
     redirect( to( "/artists" ) )
   end
 end

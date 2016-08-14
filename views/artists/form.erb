@@ -7,14 +7,11 @@
     <tr>
       <td><label for="genre">Genre:</label></td>
       <td>
-        <input list="genre_list" name="genre">
+        <input list="genre_list" name="genre"
+        <%= "value=\"#{@artist.genre}\"" if @artist.genre %>>
         <datalist id="genre_list">
           <% @genre.each do | gen | %>
-          <option value="<%= gen %>"
-            <% if @artist.genre == gen %>
-            selected
-            <% end %>
-          >
+          <option value="<%= gen %>">
           <% end %>
         </datalist>
       </td>
