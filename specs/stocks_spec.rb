@@ -67,37 +67,38 @@ class TestStocks < Minitest::Test
     id = stock.id
     stock.update
     stock = Stock.all.last
-    assert_equal(id stock.id)
+    assert_equal(id, stock.id)  # Got the right entry back
     assert_equal(@stock4.album_id, stock.album_id)
     assert_equal(@stock4.format, stock.format)
     assert_equal(@stock4.stock_level, stock.stock_level)
     assert_equal(@stock4.threshold, stock.threshold)
+    # Outstanding issue with the next line. Returning 0.0 instead of 7.0
     assert_equal(@stock4.buy_price, stock.buy_price)
     assert_equal(@stock4.sell_price, stock.sell_price)
   end
 
-  def test_05_stock_retrieve_by_id
+  # def test_05_stock_retrieve_by_id
 
-  end
+  # end
 
-  def test_09_stock_destroy
+  # def test_09_stock_destroy
 
-  end
+  # end
 
-  # Extensions to standard CRUD
+  # # Extensions to standard CRUD
 
-  def test_06_stock_by_album
-  end
+  # def test_06_stock_by_album
+  # end
 
-  def test_07_stock_by_artist
-  end
+  # def test_07_stock_by_artist
+  # end
 
-  def test_08_stock_by_genre
-  end
+  # def test_08_stock_by_genre
+  # end
 
-  def test_99
-    requests = SqlRunner.requests
-    requests.each { | r | puts r }
-  end
+  # def test_99
+  #   requests = SqlRunner.requests
+  #   requests.each { | r | puts r }
+  # end
 
 end
