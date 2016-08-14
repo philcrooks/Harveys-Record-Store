@@ -7,28 +7,28 @@ require_relative('../models/artists')
 
 class TestAlbums < Minitest::Test
   def setup
-    # Need to setup some artists that the Albums can use
+    # Need to setup some artists that the Albums can use.
+    # The Artist class should be tested first to make sure this code works.
+    Artist.destroy()
     @artist1 = Artist.new( { "name" => "The Beatles", "genre" => "popular" })
     @artist1.save
-    @artist2 = Artist.new( { "name" => "Muddy Waters", "genre" => "blues" })
-    @artist2.save
-    @artist3 = Artist.new( { "name" => "T.Rex", "genre" => "popular" })
-    @artist3.save
 
     # Clear the albums table - if this fails the tests will fail
     Album.destroy()
 
     # Create some albums for the tests
-    @album1 = Album.new( { "name" => "Abbey Road", "artist_id" => @artist1.id })
-
-    id serial4 primary key,
-    name varchar(255),
-    artist_id int4 references artists(id) on delete cascade
-
+    @album1 = Album.new( { "name" => "Abbey Road", "artist_id" => @artist1.id } )
+    @album1.save
+    @album2 = Album.new( { "name" => "The Beatles", "artist_id" => @artist1.id } )
+    @album2.save
+    @album3 = Album.new( { "name" => "Let It Be", "artist_id" => @artist1.id } )
   end
 
   def test_01_album_initalize
     # Make sure that all the fields can be read
+    assert_equal("Let It Be", @album3.name)
+    assert_equal(@artist1.id, @album3.artist_id)
+    assert_equal(0, @album3.id)
   end
 
   def test_02_album_save
