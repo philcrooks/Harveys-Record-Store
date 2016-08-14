@@ -54,8 +54,14 @@ class TestAlbums < Minitest::Test
   end
 
   def test_05_album_retrieve_by_id
+    id = @album2.id
+    album = Album.by_id( id )
+    assert_equal(id, album.id)
   end
 
   def test_06_album_destroy
+    @album1.delete
+    @album2.delete
+    assert_equal(0, Album.all.count)
   end
 end
