@@ -41,11 +41,13 @@ get '/artists/:id/edit' do
   # Show the user a form to edit an artist
   # Use the same form as the NEW page
   id = params['id'].to_i
-  @action = "/artists/#{id}"
-  @button_text = "Update Artist"
-  @genre = Artist.genre()
-  @artist = Artist.by_id( id )
-  erb( :"artists/form" )
+  if Artist.id_range.member?( id )
+    @action = "/artists/#{id}"
+    @button_text = "Update Artist"
+    @genre = Artist.genre()
+    @artist = Artist.by_id( id )
+    erb( :"artists/form" )
+  end
 end
 
 # UPDATE
@@ -57,6 +59,8 @@ end
 
 # DELETE
 post '/artists/:id/delete' do
-  Artist.destroy( params['id'] )
-  redirect( to( "/artists" ) )
+  if Artist.id_range.member?( id )
+    Artist.destroy( params['id'] )
+    redirect( to( "/artists" ) )
+  end
 end
