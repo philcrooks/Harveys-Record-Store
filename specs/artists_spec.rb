@@ -44,9 +44,11 @@ class TestArtists < Minitest::Test
 
   def test_04_artist_update
     @artist1.genre = "pop"
+    @artist1.name = "The Rolling Stones"
     @artist1.update
     artist = Artist.all.last
     assert_equal("pop", artist.genre)
+    assert_equal("The Rolling Stones", artist.name)
   end
 
   def test_05_artist_retrieve_by_id

@@ -12,6 +12,8 @@ class TestAlbums < Minitest::Test
     Artist.destroy()
     @artist1 = Artist.new( { "name" => "The Beatles", "genre" => "popular" })
     @artist1.save
+    @artist2 = Artist.new( { "name" => "Muddy Waters", "genre" => "blues" })
+    @artist2.save
 
     # Clear the albums table - if this fails the tests will fail
     Album.destroy()
@@ -32,12 +34,23 @@ class TestAlbums < Minitest::Test
   end
 
   def test_02_album_save
+    assert_equal(true, @album1.id > 0)
+    assert_equal(@album1.id + 1, @album2.id)
   end
 
   def test_03_album_retrieve
+    assert_equal(2, Album.all.count)
   end
 
   def test_04_album_update
+    # Test that all fields can be updated (except id)
+    album = Album.all.last
+    assert_equal("The Beatles", album.name)
+    album.name = "Electric Mud"
+    album.artist_id = @artist2.id
+    album.update
+    album = Album.all.last
+    assert_equal("Electric Mud", album.name)
   end
 
   def test_05_album_retrieve_by_id

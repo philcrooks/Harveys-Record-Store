@@ -3,10 +3,12 @@ require_relative('../db/db_interface')
 class Album
   TABLE = "albums"
 
-  attr_reader( :id, :name, :artist_id )
+  attr_reader :id
+  attr_accessor :name, :artist_id 
 
   def save()
-    return DbInterface.insert( TABLE, self )
+    @id = DbInterface.insert( TABLE, self )
+    return @id
   end
 
   def update()
