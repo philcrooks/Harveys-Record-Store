@@ -1,7 +1,12 @@
 require('pg')
 
 class SqlRunner
-
+  
+  def SqlRunner.print_requests
+    @@requests ||= []
+    @@requests.each { | r | puts r }
+  end
+ 
   def SqlRunner.clear_requests
     @@requests = []
   end
