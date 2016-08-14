@@ -40,4 +40,10 @@ class Artist
     DbInterface.delete( TABLE, id )
     return nil
   end
+
+  def self.genre()
+    sql = "SELECT DISTINCT genre FROM #{TABLE}"
+    genre = SqlRunner.run( sql )
+    return genre.map { | g | g['genre'] }
+  end
 end

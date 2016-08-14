@@ -64,6 +64,14 @@ class TestArtists < Minitest::Test
     assert_equal(0, artists.count)
   end
 
+  def test_07_artist_genre_list
+    genre = Artist.genre()
+    genre.sort!
+    assert_equal(2, genre.count)
+    assert_equal("blues", genre[0])
+    assert_equal("popular", genre[1])
+  end
+
   # def test_99
   #   requests = SqlRunner.requests
   #   requests.each { | r | puts r }
