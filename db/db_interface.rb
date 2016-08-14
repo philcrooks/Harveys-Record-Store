@@ -33,6 +33,12 @@ class DbInterface
     end
   end
 
+  def self.id_range( table )
+    sql = "SELECT MIN(id) AS min, MAX(id) AS max FROM #{table}"
+    result = SqlRunner.run( sql )
+    return ( result.first['min'].to_i..result.first['max'].to_i )
+  end
+
   private
 
   def self.to_hash ( object )

@@ -9,8 +9,12 @@
       <td>
         <input list="genre_list" name="genre">
         <datalist id="genre_list">
-          <% @genre.each do | genre | %>
-          <option value="<%= genre %>">
+          <% @genre.each do | gen | %>
+          <option value="<%= gen %>"
+            <% if @artist.genre == gen %>
+            selected
+            <% end %>
+          >
           <% end %>
         </datalist>
       </td>

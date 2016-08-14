@@ -46,4 +46,8 @@ class Artist
     genre = SqlRunner.run( sql )
     return genre.map { | g | g['genre'] }
   end
+
+  def self.id_range()
+    return DbInterface.id_range( TABLE )
+  end
 end

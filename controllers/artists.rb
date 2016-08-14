@@ -30,8 +30,10 @@ end
 get '/artists/:id' do
   # The user wants to see the details for one artist
   id = params['id'].to_i
-  @artist = Artist.by_id( id )
-  erb ( :"artists/show")
+  if Artist.id_range.member?( id )
+    @artist = Artist.by_id( id )
+    erb ( :"artists/show")
+  end
 end
 
 # EDIT

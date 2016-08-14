@@ -16,7 +16,7 @@ class Album
   end
 
   def delete()
-    @id = Album.destroy(@id)
+    @id = Album.destroy(@id) if @id
     return @id
   end
 
