@@ -17,7 +17,7 @@ class Stock
   end
 
   def delete()
-    @id = Stock.destroy( @id )
+    @id = Stock.destroy( @id ) if @id
     return @id
   end
 

@@ -16,7 +16,7 @@ class Artist
   end
 
   def delete()
-    @id = Artist.destroy(@id)
+    @id = Artist.destroy(@id) if @id
     return @id
   end
 

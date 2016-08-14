@@ -22,11 +22,15 @@ class DbInterface
   end
 
   def self.update ( table, object )
-	strings = to_strings( object )
-    sql = "UPDATE #{table} SET (" + strings[ :fields ] + ") = (" +
-      strings[ :values ] + ") WHERE id = #{object.id} RETURNING *"
-    result = SqlRunner.run( sql ).first
-    return result["id"].to_i
+    if object.id && object.id > 0
+	    strings = to_strings( object )
+      sql = "UPDATE #{table} SET (" + strings[ :fields ] + ") = (" +
+        strings[ :values ] + ") WHERE id = #{object.id} RETURNING *"
+      result = SqlRunner.run( sql ).first
+      return result["id"].to_i
+    else
+      return nil
+    end
   end
 
   private

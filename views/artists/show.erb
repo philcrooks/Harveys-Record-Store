@@ -1,0 +1,12 @@
+<p>The following albums have been released by <%= @artist.name %>:</p>
+<ol>
+  <% @albums.each do | album | %>
+  <li><%= album.name %> (<%= album.year %>) <a href="/albums/<%=album.id %>">View</a></li>
+  <% end %>
+</ol>
+<p>
+  <a href="/artists/<%= @artist.id %>/edit">Edit Artist</a>
+  <form action="/artists/<%= @artist.id %>/delete" method="post">
+    <input type="submit" value="Delete Artist" >
+  </form>
+</p>
