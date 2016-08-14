@@ -57,7 +57,23 @@ class TestStocks < Minitest::Test
 
   def test_04_stock_update
     # Test that all fields can be updated (except id)
-
+    stock = Stock.all.last
+    stock.album_id = @stock4.album_id
+    stock.format = @stock4.format
+    stock.stock_level = @stock4.stock_level
+    stock.threshold = @stock4.threshold
+    stock.buy_price = @stock4.buy_price
+    stock.sell_price = @stock4.sell_price
+    id = stock.id
+    stock.update
+    stock = Stock.all.last
+    assert_equal(id stock.id)
+    assert_equal(@stock4.album_id, stock.album_id)
+    assert_equal(@stock4.format, stock.format)
+    assert_equal(@stock4.stock_level, stock.stock_level)
+    assert_equal(@stock4.threshold, stock.threshold)
+    assert_equal(@stock4.buy_price, stock.buy_price)
+    assert_equal(@stock4.sell_price, stock.sell_price)
   end
 
   def test_05_stock_retrieve_by_id
@@ -79,5 +95,9 @@ class TestStocks < Minitest::Test
   def test_08_stock_by_genre
   end
 
+  def test_99
+    requests = SqlRunner.requests
+    requests.each { | r | puts r }
+  end
 
 end

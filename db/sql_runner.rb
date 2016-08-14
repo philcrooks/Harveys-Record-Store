@@ -2,6 +2,10 @@ require('pg')
 
 class SqlRunner
 
+  def SqlRunner.clear_requests
+    @@requests = []
+  end
+
   def SqlRunner.requests
     @@requests ||= []
     return @@requests
