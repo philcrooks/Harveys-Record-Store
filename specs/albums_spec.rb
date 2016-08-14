@@ -59,7 +59,13 @@ class TestAlbums < Minitest::Test
     assert_equal(id, album.id)
   end
 
-  def test_06_album_destroy
+  def test_06_albums_by_artist
+    albums = Album.by_artist(@artist1.id)
+    assert_equal(@artist1.id, albums.first.artist_id)
+    assert_equal(2, albums.count)
+  end
+
+  def test_07_album_destroy
     @album1.delete
     @album2.delete
     assert_equal(0, Album.all.count)

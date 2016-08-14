@@ -3,12 +3,19 @@ class Stock
 
   attr_reader :id
   attr_accessor :album_id, :format, :stock_level, :threshold, :buy_price, :sell_price
+
   def save()
-    return DbInterface.insert(TABLE, self)
+    @id = DbInterface.insert(TABLE, self)
+    return @id
   end
 
   def update()
     return DbInterface.update(TABLE, self)
+  end
+
+  def delete()
+    @id = Stock.destroy( @id )
+    return @id
   end
 
   def initialize ( options )
@@ -31,7 +38,7 @@ class Stock
     return Stock.new( stock.first )
   end
 
-  def self.destroy( id )
+  def self.destroy( id = nil )
     DbInterface.delete( TABLE, id )
     return nil
   end
