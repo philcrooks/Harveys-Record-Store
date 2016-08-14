@@ -46,4 +46,7 @@ class Album
     return nil
   end
 
+  def self.id_range()
+    return DbInterface.id_range( TABLE )
+  end
 end

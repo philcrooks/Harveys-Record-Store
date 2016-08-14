@@ -1,0 +1,29 @@
+<form action="<%= @action %>" method="post">
+  <table>
+    <tr>
+      <td><label for="artist_id">Artist:</label></td>
+      <td>
+        <select name="artist_id">
+          <% @artists.each do | artist | %>
+          <option value="<%= artist.id %> "
+          <% if artist.id == @album.artist_id %>
+          selected
+          <% end %>
+          ><%= "#{artist.name}" %></option>
+          <% end %>    
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td><label for="name">Title:</label></td>
+      <td><input size="40" type="text" name="name"
+      <% if @album.name %>
+      <%= "value=\"#{@album.name}\"" %>
+      <% end %>
+      ></td>
+    </tr>
+    <tr>
+      <td align="right" colspan="4"><input type="submit" value="<%= @button_text %>"></td>
+    </tr>
+  </table>
+</form>

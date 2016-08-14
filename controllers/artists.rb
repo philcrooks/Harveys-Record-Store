@@ -58,9 +58,9 @@ post '/artists/:id' do
 end
 
 # DELETE
-post '/artists/:id/delete' do
-  if Artist.id_range.member?( id )
-    Artist.destroy( params['id'].to_i )
-    redirect( to( "/artists" ) )
-  end
-end
+# post '/artists/:id/delete' do
+#   if Artist.id_range.member?( id )
+#     Artist.destroy( params['id'].to_i )
+#     redirect( to( "/artists" ) )
+#   end
+# end
