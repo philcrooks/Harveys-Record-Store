@@ -91,18 +91,19 @@ class TestStocks < Minitest::Test
 
   # # Extensions to standard CRUD
 
-  # def test_06_stock_by_album
-  # end
+  def test_06_stock_by_album
+    stocks = Stock.by_album( @album1.id )
+    assert_equal(2, stocks.count)
+    assert_equal(@album1.id, stocks.first.album_id)
+  end
 
   # def test_07_stock_by_artist
+  # # Will require a join with the album table
   # end
 
   # def test_08_stock_by_genre
+  # # Will require a join with the album and artist table
   # end
 
-  # def test_99
-  #   requests = SqlRunner.requests
-  #   requests.each { | r | puts r }
-  # end
 
 end

@@ -41,6 +41,11 @@ class Stock
     return Stock.new( stock.first )
   end
 
+  def self.by_album ( album_id )
+    stock = DbInterface.select( TABLE, album_id, "album_id" )
+    return stock.map { |s| Stock.new( s ) }
+  end
+
   def self.destroy( id = nil )
     DbInterface.delete( TABLE, id )
     return nil
