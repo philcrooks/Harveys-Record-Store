@@ -48,10 +48,11 @@ class TestStocks < Minitest::Test
   end
 
   def test_02_stock_save
-
+    assert_equal(true, @stock1.id > 0)
   end
 
   def test_03_stock_retrieve
+    assert_equal(3, Stock.all.count)
   end
 
   def test_04_stock_update
