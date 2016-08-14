@@ -20,6 +20,6 @@ CREATE TABLE stocks (
   format varchar(255),
   stock_level integer,
   threshold integer,
-  buy_price money,
-  sell_price money
-)
+  buy_price decimal(10,2),
+  sell_price decimal(10,2)
+);

@@ -1,3 +1,6 @@
+require_relative( '../db/db_interface' )
+require( 'pry-byebug' )
+
 class Stock
   TABLE = "stocks"
 

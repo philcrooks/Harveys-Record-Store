@@ -3,6 +3,7 @@ require('minitest/rg')
 require_relative('../models/stocks')
 require_relative('../models/albums')
 require_relative('../models/artists')
+require_relative('../db/sql_runner')
 
 class TestStocks < Minitest::Test
   def setup
@@ -72,9 +73,8 @@ class TestStocks < Minitest::Test
     assert_equal(@stock4.format, stock.format)
     assert_equal(@stock4.stock_level, stock.stock_level)
     assert_equal(@stock4.threshold, stock.threshold)
-    # Outstanding issue with the next two lines. Returning 0.0 instead of 7.0
-    # assert_equal(@stock4.buy_price, stock.buy_price)
-    # assert_equal(@stock4.sell_price, stock.sell_price)
+    assert_equal(@stock4.buy_price, stock.buy_price)
+    assert_equal(@stock4.sell_price, stock.sell_price)
   end
 
   def test_05_stock_retrieve_by_id
