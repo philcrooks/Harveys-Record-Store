@@ -3,10 +3,12 @@
 # NEW
 get '/albums/new' do
   # Show the user a form to enter artist details
+  artist_id = 0
+  artist_id = params['artist'].to_i if params['artist']
+  @artists = artist_id > 0 ? [Artist.by_id(artist_id)] : Artist.all
   @action = "/albums"
   @button_text = "Create Album"
   @album = EmptyAlbum.new()
-  @artists = Artist.all
   erb( :"albums/form" )
 end
 

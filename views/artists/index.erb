@@ -1,0 +1,14 @@
+<table>
+  <tr>
+    <td><a href="/artists/new">New Artist</a></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <% @artists.each do | artist | %>
+  <tr>
+    <td class="tab-head"><%= artist.name %></td>
+    <td><a href="/albums/new?artist=<%= artist.id.to_s %>">New Album</a></td>
+    <td><a href="/stocks/new?artist=<%= artist.id.to_s %>">New Stock</a></td>
+  </tr>
+  <% end %>
+</table>

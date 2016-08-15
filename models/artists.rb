@@ -20,9 +20,15 @@ class Artist
     return @id
   end
 
+  def compare_name()
+    return @name[4..-1] if @name.downcase.start_with?("the ")
+    return @name[1..-1] if @name.downcase.start_with?("a ")
+    return @name
+  end
+
   def <=>( neighbour )
     # This should eventually deal with artist names that start with 'The' etc
-    return @name <=> neighbour.name
+    return compare_name <=> neighbour.compare_name
   end
 
   def initialize( options )

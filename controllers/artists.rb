@@ -13,10 +13,10 @@ end
 # CREATE
 post '/artists' do
   # The user has POSTed the stock NEW form
-  @artist = Artist.new( params )
-  @artist.genre.downcase!
-  @artist.save
-  erb( :"artists/create" )
+  artist = Artist.new( params )
+  artist.genre.downcase!
+  artist.save
+  redirect( to( "/artists" ) )
 end
 
 # INDEX
