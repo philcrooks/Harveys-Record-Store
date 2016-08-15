@@ -47,6 +47,11 @@ class Artist
     return genre.map{ | g | g['genre'] }.sort
   end
 
+  def self.by_genre( genre )
+    artists = DbInterface.select(TABLE, genre, "genre")
+    return artists.map { |a| Artist.new( a ) }
+  end
+
   def self.id_range()
     return DbInterface.id_range( TABLE )
   end

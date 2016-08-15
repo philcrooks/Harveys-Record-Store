@@ -72,6 +72,12 @@ class TestArtists < Minitest::Test
     assert_equal("popular", genre[1])
   end
 
+  def test_08_artist_by_genre
+    artists = Artist.by_genre("popular")
+    assert_equal(1, artists.count)
+    assert_equal("The Beatles", artists.first.name)
+  end
+
   # def test_99
   #   requests = SqlRunner.requests
   #   requests.each { | r | puts r }

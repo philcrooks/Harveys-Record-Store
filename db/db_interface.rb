@@ -3,7 +3,10 @@ require_relative( 'sql_runner' )
 class DbInterface
   def self.select( table, id = nil, field = "id" )
     sql = "SELECT * FROM #{table}"
-    sql += " WHERE #{ field } = #{ id }" if id
+    if id
+      sql += " WHERE #{ field } = "
+      sql += id.is_a?( Numeric ) ? "#{ id }" : "'#{id.gsub("'", "''")}'"
+    end
     return SqlRunner.run( sql )
   end
 
