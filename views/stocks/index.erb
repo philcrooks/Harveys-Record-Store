@@ -1,0 +1,6 @@
+<% genres = Artist.genre %>
+<% genres.each do | genre | %>
+<% artists = Artist.by_genre %>
+<% artists.each do | artists %>
+<li>
+<ul><%= genre  %></ul>

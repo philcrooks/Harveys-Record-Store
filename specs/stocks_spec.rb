@@ -104,9 +104,12 @@ class TestStocks < Minitest::Test
     assert_equal(@artist1.id, Album.by_id(stocks.first.album_id).artist_id )
   end
 
-  # def test_08_stock_by_genre
-  # # Will require a join with the album and artist table
-  # end
+  def test_08_format_by_artist
+    formats = Stock.format_by_artist( @artist1.id )
+    assert_equal(2, formats.count)
+    assert_equal("cd", formats[0])
+    assert_equal("vinyl", formats[1])
+  end
 
 
 end
