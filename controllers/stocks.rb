@@ -4,8 +4,15 @@
 # NEW
 get '/stocks/new' do
   # Show the user a form to enter stock details
-  @action = "/stocks"
-  erb( :"stocks/form" )
+  artist_id = 0
+  artist_id = params['artist'].to_i if params['artist']
+  @artist = ""
+  @albums = []
+  if artist_id > 0
+    @artist = Artist.by_id(artist_id)
+    @albums = Album.by_artist(artist_id)
+  end
+  erb( :"stocks/new" )
 end
 
 # CREATE
@@ -20,7 +27,13 @@ end
 get '/stocks' do
   # The user wants to see all the stock
   # There will probably be multiple ways of viewing an index
-  erb( :"stocks/index")
+  index_type = params['index']
+  if index_type == "flat"
+    erb( :"stocks/flatindex")
+  else
+    erb( :"stocks/nestedindex")
+  end
+
 end
 
 # SHOW
@@ -38,7 +51,7 @@ get '/stocks/:id/edit' do
   id = params['id'].to_i
   @action = "/stocks/#{id}"
   @stock = Stock.by_id( id )
-  erb( :"stocks/form" )
+  erb( :"stocks/edit" )
 end
 
 # UPDATE

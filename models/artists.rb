@@ -33,7 +33,7 @@ class Artist
 
   def self.all()
     artists = DbInterface.select( TABLE )
-    return artists.map { |a| Artist.new( a ) }
+    return artists.map{ |a| Artist.new( a ) }.sort
   end
 
   def self.by_id( id )
@@ -54,7 +54,7 @@ class Artist
 
   def self.by_genre( genre )
     artists = DbInterface.select(TABLE, genre, "genre")
-    return artists.map { |a| Artist.new( a ) }
+    return artists.map{ |a| Artist.new( a )}.sort
   end
 
   def self.id_range()

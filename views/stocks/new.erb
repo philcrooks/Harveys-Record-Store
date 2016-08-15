@@ -1,0 +1,46 @@
+<form action="/stocks" method="post">
+  <table>
+    <tr>
+      <td><label>Artist:</label></td>
+      <td><label><%= @artist.name %></label></td>
+    </tr>
+    <tr>
+      <td><label for="album_id">Album:</label></td>
+      <td>
+        <select name="album_id">
+          <% @albums.each do | album | %>
+          <option value="<%= album.id %>"><%= "#{album.name}" %></option>
+          <% end %>    
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td><label for="format"></td>
+      <td>
+        <select name="format">
+          <option value="cd">CD</option>
+          <option value="vinyl">Vinyl</option>    
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td><label for="stock_level">Stock Level:</label></td>
+      <td><input type="text" min="0" name="stock_level" value="0"></td>
+    </tr>
+    <tr>
+      <td><label for="threshold">Stock Theshold:</td>
+      <td><input type="text" min="0" name="threshold" value="1"></td>
+    </tr>
+    <tr>
+      <td><label for="buy_price">Buy For (£):</td>
+      <td><input type="text" min="0" name="buy_price" value="0.00"></td>
+    </tr>
+    <tr>
+      <td><label for="sell_price">Sell For (£):</td>
+      <td><input type="text" min="0" name="sell_price" value="0.00"></td>
+    </tr>
+    <tr>
+      <td align="right" colspan="2"><input type="submit" value="Add Stock" ></td>
+    </tr>
+  </table>
+</form>
