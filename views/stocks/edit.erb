@@ -6,11 +6,11 @@
     </tr>
     <tr>
       <td><label>Album:</label></td>
-      <td><%= @stock.album.name %></td>
+      <td><input type="hidden" value="<%= @stock.album.id.to_s %>" name="album_id" /><%= @stock.album.name %></td>
     </tr>
     <tr>
       <td><label>Format:</label></td>
-      <td><%= @stock.stock.format %></td>
+      <td><input type="hidden" value="<%= @stock.stock.format %>" name="format" /><%= @stock.stock.format %></td>
     </tr>
     <tr>
       <td><label for="stock_level">Stock Level:</label></td>

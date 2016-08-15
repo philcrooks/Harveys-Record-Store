@@ -11,6 +11,8 @@ require_relative('controllers/albums')
 require_relative('controllers/stocks')
 require('pry-byebug')
 
-# get '/' do
-#   redirect( to( "/artists" ))
-# end
+get '/' do
+  stocks = Stock.attention_needed()
+  @stocks = stocks.map{ | s | LinkedStock.new( s ) }.sort
+  erb( :"stocks/flatindex")
+end

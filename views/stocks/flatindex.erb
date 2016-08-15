@@ -1,6 +1,5 @@
-<% stocks = Stock.all.map{ | s | LinkedStock.new( s ) }.sort %>
 <ul>
-  <% stocks.each do | s | %>
-  <li><%= "#{s.artist.name} #{s.album.name} #{s.stock.format} #{s.stock.stock_level} #{s.stock.threshold} #{s.stock.buy_price} #{s.stock.sell_price}" %></li>
+  <% @stocks.each do | s | %>
+  <li><%= "#{s.artist.name} #{s.album.name} #{s.stock.format} #{s.stock.stock_level} #{s.stock.threshold} #{s.stock.buy_price} #{s.stock.sell_price} " %><a href="/stocks/<%= s.stock.id.to_s %>/edit">Edit</a></li>
   <% end %>
 </ul>

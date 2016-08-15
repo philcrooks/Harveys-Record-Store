@@ -21,7 +21,7 @@ class Stock
     return @id
   end
 
-  def initialize ( options )
+  def initialize( options )
     @id = options['id'].to_i
     @album_id = options['album_id'].to_i
     @format = options['format']
@@ -41,7 +41,7 @@ class Stock
     return Stock.new( stock.first )
   end
 
-  def self.by_album ( album_id )
+  def self.by_album( album_id )
     stock = DbInterface.select( TABLE, album_id, "album_id" )
     return stock.map { |s| Stock.new( s ) }
   end
@@ -51,16 +51,21 @@ class Stock
     return nil
   end
 
-  def self.by_artist ( artist_id, format = nil )
+  def self.by_artist( artist_id, format = nil )
     sql = "SELECT s.* FROM stocks s INNER JOIN albums a ON s.album_id = a.id WHERE a.artist_id = #{artist_id}"
     sql += " AND s.format = '#{format}'" if format
+    sql += " ORDER BY a.name"
     stock = SqlRunner.run( sql )
     return stock.map { | s | Stock.new( s ) }
   end
 
-  def self.formats_by_artist ( artist_id )
+  def self.formats_by_artist( artist_id )
     sql = "SELECT DISTINCT s.format FROM stocks s INNER JOIN albums a ON s.album_id = a.id WHERE a.artist_id = #{artist_id}"
     stock = SqlRunner.run( sql )
     return stock.map{ | s | s['format'] }.sort
+  end
+
+  def self.attention_needed()
+    return Stock.all.select { | s | s.stock_level <= s.threshold }
   end
 end

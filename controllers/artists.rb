@@ -20,11 +20,11 @@ post '/artists' do
 end
 
 # INDEX
-# get '/artists' do
-#   # The user wants to see all the stock
-#   @artist = Artist.all
-#   erb( :"artists/index")
-# end
+get '/artists' do
+  # The user wants to see all the stock
+  @artists = Artist.all
+  erb( :"artists/index")
+end
 
 # SHOW
 get '/artists/:id' do

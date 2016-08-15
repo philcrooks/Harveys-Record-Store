@@ -30,6 +30,7 @@ get '/stocks' do
   # There will probably be multiple ways of viewing an index
   index_type = params['index']
   if index_type == "flat"
+    @stocks = Stock.all.map{ | s | LinkedStock.new( s ) }.sort
     erb( :"stocks/flatindex")
   else
     erb( :"stocks/nestedindex")
@@ -40,7 +41,7 @@ end
 get '/stocks/:id' do
   # The user wants to see the details for one stock entry
   id = params['id'].to_i
-  @stock = LinkedStock.new(stock.by_id( id ))
+  @stock = LinkedStock.new(Stock.by_id( id ))
   erb ( :"stocks/show")
 end
 

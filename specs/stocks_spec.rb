@@ -30,9 +30,9 @@ class TestStocks < Minitest::Test
     Stock.destroy()
     @stock1 = Stock.new( { 'album_id' => @album1.id, 'format' => 'cd', 'stock_level' => 5, 'threshold' => 5, 'buy_price' => 5.00, 'sell_price' => 7.50 } )
     @stock1.save
-    @stock2 = Stock.new( { 'album_id' => @album1.id, 'format' => 'vinyl', 'stock_level' => 2, 'threshold' => 3, 'buy_price' => 7.00, 'sell_price' => 15.00 } )
+    @stock2 = Stock.new( { 'album_id' => @album1.id, 'format' => 'vinyl', 'stock_level' => 4, 'threshold' => 3, 'buy_price' => 7.00, 'sell_price' => 15.00 } )
     @stock2.save
-    @stock3 = Stock.new( { 'album_id' => @album2.id, 'format' => 'cd', 'stock_level' => 5, 'threshold' => 5, 'buy_price' => 5.00, 'sell_price' => 10.00 } )
+    @stock3 = Stock.new( { 'album_id' => @album2.id, 'format' => 'cd', 'stock_level' => 3, 'threshold' => 5, 'buy_price' => 5.00, 'sell_price' => 10.00 } )
     @stock3.save
     @stock4 = Stock.new( { 'album_id' => @album3.id, 'format' => 'cd', 'stock_level' => 1, 'threshold' => 2, 'buy_price' => 7.00, 'sell_price' => 10.00 } )
   end
@@ -115,6 +115,11 @@ class TestStocks < Minitest::Test
     stocks = Stock.by_artist( @artist1.id, 'vinyl' )
     assert_equal(1, stocks.count)
     assert_equal("Abbey Road", Album.by_id(stocks.first.album_id).name )
+  end
+
+  def test_10_stock_needing_attention
+    stocks = Stock.attention_needed()
+    assert_equal(2, stocks.count)
   end
 
 end
