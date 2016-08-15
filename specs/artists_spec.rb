@@ -66,7 +66,7 @@ class TestArtists < Minitest::Test
 
   def test_07_artist_genre_list
     genre = Artist.genre()
-    genre.sort!
+    # genre.sort!
     assert_equal(2, genre.count)
     assert_equal("blues", genre[0])
     assert_equal("popular", genre[1])

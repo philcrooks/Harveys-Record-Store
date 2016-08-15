@@ -44,7 +44,7 @@ class Artist
   def self.genre()
     sql = "SELECT DISTINCT genre FROM #{TABLE}"
     genre = SqlRunner.run( sql )
-    return genre.map { | g | g['genre'] }
+    return genre.map{ | g | g['genre'] }.sort
   end
 
   def self.id_range()
