@@ -50,4 +50,10 @@ class Stock
     DbInterface.delete( TABLE, id )
     return nil
   end
+
+  def self.by_artist ( artist_id )
+    sql = "SELECT s.* FROM stocks s INNER JOIN albums a ON s.album_id = a.id WHERE a.artist_id = #{artist_id}"
+    stock = SqlRunner.run( sql )
+    return stock.map { | s | Stock.new( s ) }
+  end
 end

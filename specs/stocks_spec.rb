@@ -97,9 +97,12 @@ class TestStocks < Minitest::Test
     assert_equal(@album1.id, stocks.first.album_id)
   end
 
-  # def test_07_stock_by_artist
-  # # Will require a join with the album table
-  # end
+  def test_07_stock_by_artist
+    # Requires a join with the album table
+    stocks = Stock.by_artist( @artist1.id )
+    assert_equal(3, stocks.count)
+    assert_equal(@artist1.id, Album.by_id(stocks.first.album_id).artist_id )
+  end
 
   # def test_08_stock_by_genre
   # # Will require a join with the album and artist table
