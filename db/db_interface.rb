@@ -54,7 +54,7 @@ class DbInterface
     for x, y in hash
       if x != "id"
         fields += "#{x}, "
-        values += y.is_a?( Numeric ) ? "#{y}, " : "'#{y}', "
+        values += y.is_a?( Numeric ) ? "#{y}, " : "'#{y.gsub("'", "''")}', "
       end
     end
     return { :fields => fields[0..-3], :values => values[0..-3] }

@@ -21,7 +21,7 @@ class TestAlbums < Minitest::Test
     # Create some albums for the tests
     @album1 = Album.new( { "name" => "Abbey Road", "artist_id" => @artist1.id } )
     @album1.save
-    @album2 = Album.new( { "name" => "The Beatles", "artist_id" => @artist1.id } )
+    @album2 = Album.new( { "name" => "The Beatles' White Album", "artist_id" => @artist1.id } )
     @album2.save
     @album3 = Album.new( { "name" => "Let It Be", "artist_id" => @artist1.id } )
   end
@@ -45,7 +45,7 @@ class TestAlbums < Minitest::Test
   def test_04_album_update
     # Test that all fields can be updated (except id)
     album = Album.all.last
-    assert_equal("The Beatles", album.name)
+    assert_equal("The Beatles' White Album", album.name)
     album.name = "Electric Mud"
     album.artist_id = @artist2.id
     album.update
