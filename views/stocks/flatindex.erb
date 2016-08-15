@@ -1,5 +1,34 @@
-<ul>
-  <% @stocks.each do | s | %>
-  <li><%= "#{s.artist.name} #{s.album.name} #{s.stock.format} #{s.stock.stock_level} #{s.stock.threshold} #{s.stock.buy_price} #{s.stock.sell_price} " %><a href="/stocks/<%= s.stock.id.to_s %>/edit">Edit</a></li>
-  <% end %>
-</ul>
+<table>
+  <thead>
+    <tr>
+       <th>Artist</th>
+       <th>Album</th>
+       <th>Format</th>
+       <th>Stock Level</th>
+       <th>Threshold</th>
+       <th>Buy For (£)</th>
+       <th>Sell For (£)</th>
+       <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @stocks.each do | s | %>
+    <% if s.stock.no_stock?() %>
+    <tr class="no-stock">
+    <% elsif s.stock.low_stock?() %>
+    <tr class="low-stock">
+    <% else %>
+    <tr>
+    <% end %>
+      <td><%= s.artist.name %></td>
+      <td><%= s.album.name %></td>
+      <td align="center"><%= s.stock.format %></td>
+      <td align="right"><%= s.stock.stock_level.to_s %></td>
+      <td align="right"><%= s.stock.threshold %></td>
+      <td align="right"><%= "%0.2f" % [s.stock.buy_price] %></td>
+      <td align="right"><%= "%0.2f" % [s.stock.sell_price] %></td>
+      <td align="center"><a href="/stocks/<%= s.stock.id.to_s %>/edit">Edit</a></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

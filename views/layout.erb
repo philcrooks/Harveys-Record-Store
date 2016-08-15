@@ -1,10 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
-  <link rel="stylesheet" type="text/css" href="/style.css">
+  <title>Harvey's Record Store</title>
+  <link rel="stylesheet" type="text/css" href="/assets/base.css">
+  <link rel="stylesheet" type="text/css" href="/fixed-navigation-bar.css">
 </head>
 <body>
+<nav class="fixed-nav-bar">
+  <div id="menu" class="menu">
+ <!--    <a class="sitename" href="fixed-navigation-bar.html">Fixed Nav Bar</a>
+    <a class="show" href="#menu">Menu</a><a class="hide" href="#hidemenu">Menu</a>
+ -->
+    <div class="sitename"><i><b>Harvey's Record Store</b></i></div>
+     <ul class="menu-items">
+      <li><a href="/">Home</a></li>
+      <li><a href="/stocks?index=flat">Manage Stock</a></li>
+      <li><a href="/stocks?index=nested">Stock Report</a></li>
+    </ul>
+  </div>
+</nav>
+<section class="content">
 <%= yield %>
+</section>
 </body>
 </html>

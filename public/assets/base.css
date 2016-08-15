@@ -1,0 +1,132 @@
+/* WEB FONT */
+@import url(http://fonts.googleapis.com/css?family=Signika:600|Varela+Round);
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+/* BASIC */
+body {
+  /*font: normal 18px/22px "Varela Round", sans-serif;*/
+  font: normal 14px "Varela Round", sans-serif;
+  background-color: #e9ffff;
+  color: #2e2e2e;
+}
+h1, h2 {
+  font-family: "Signika", sans-serif;
+  font-weight: 600;
+}
+h1 {
+  font-size: 36px;
+  line-height: 46px;
+  color: #e0e0e0;
+}
+h2 {
+  font-size: 24px;
+  line-height: 33px;
+  margin-bottom: -20px;
+}
+p {
+  margin: 20px 0;
+}
+a:link, a:visited, a:hover, a:active {
+  text-decoration: none;
+}
+/*table {
+  padding: 3px;
+}
+thead {
+  background-color: white;
+}*/
+table {
+/*    border-collapse: collapse;*/
+border-radius: 5px;
+    box-shadow: 0px 0px 3px 0px rgba(50, 50, 50, 0.6);
+}
+table, th, td {
+/*    border: 1px solid black;*/
+    padding: 3px 6px;
+}
+th {
+    height: 20px;
+    color: white;
+    background-color: #00a087;
+}
+
+
+/* LAYOUT */
+.no-stock {
+  background-color: #ff5050;
+  color: black;
+}
+
+.low-stock {
+  background-color: #ffcc00;
+  color: black;
+}
+
+.tab-head, .tab-head label {
+  color: white;
+  background-color: #00a087;
+}
+
+.fixed-nav-bar {
+  box-shadow: 0px 0px 3px 0px rgba(50, 50, 50, 0.6);
+}
+
+.content {
+  position: relative;
+  width: 90%;
+  margin: 0 auto;
+  color: #747474;
+}
+.content h1 {
+  color: #384e56;
+  margin-top: 60px;
+  text-transform: uppercase;
+}
+.content h2 a:link, .content h2 a:visited  {
+  color: #464646;
+  transition: color 0.1s ease;
+}
+.content h2 a:hover {
+  color: #000000;
+  transition: color 0.3s ease;
+}
+/* SPECIAL */
+.summary {
+  color: #d9dee2;
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+.button, .button:visited, .button-dark {
+  display: inline-block;
+  max-width: 200px;
+  margin: 50px 10px 30px 10px;
+  padding: 10px;
+  font-family: "Signika", sans-serif;
+  color: #ffffff;
+  background-color: transparent;
+  border: 2px solid #ffffff;
+  border-radius: 3px;
+  text-transform: capitalize;
+  text-align: center;
+  transition: all 0.1s ease;
+}
+.button-dark, .button-dark:visited {
+  margin: 20px 10px 30px 0;
+  color: #464646;
+  border-color: #464646;
+}
+.button:hover, .button-dark:hover {
+  transition: all 0.3s ease;
+}
+.button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.button-dark:hover {
+  color: #ffffff;
+  background-color: rgba(70, 70, 70, 0.9);
+}

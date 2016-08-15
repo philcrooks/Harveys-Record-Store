@@ -1,32 +1,32 @@
 <form action="/stocks/<%= @stock.stock.id.to_s %>" method="post">
   <table>
     <tr>
-      <td><label>Artist:</label></td>
+      <td class="tab-head"><label>Artist:</label></td>
       <td><%= @stock.artist.name %></td>
     </tr>
     <tr>
-      <td><label>Album:</label></td>
+      <td class="tab-head"><label>Album:</label></td>
       <td><input type="hidden" value="<%= @stock.album.id.to_s %>" name="album_id" /><%= @stock.album.name %></td>
     </tr>
     <tr>
-      <td><label>Format:</label></td>
+      <td class="tab-head"><label>Format:</label></td>
       <td><input type="hidden" value="<%= @stock.stock.format %>" name="format" /><%= @stock.stock.format %></td>
     </tr>
     <tr>
-      <td><label for="stock_level">Stock Level:</label></td>
-      <td><input type="text" min="0" name="stock_level" value="<%= @stock.stock.stock_level.to_s %>"></td>
+      <td class="tab-head"><label for="stock_level">Stock Level:</label></td>
+      <td><input type="text" size="10" min="0" name="stock_level" value="<%= @stock.stock.stock_level.to_s %>"></td>
     </tr>
     <tr>
-      <td><label for="threshold">Stock Theshold:</td>
-      <td><input type="text" min="0" name="threshold" value="<%= @stock.stock.threshold.to_s %>"></td>
+      <td class="tab-head"><label for="threshold">Stock Theshold:</td>
+      <td><input type="text" size="10" min="0" name="threshold" value="<%= @stock.stock.threshold.to_s %>"></td>
     </tr>
     <tr>
-      <td><label for="buy_price">Buy For (£):</td>
-      <td><input type="text" min="0" name="buy_price" value="<%= "%0.2f" % [@stock.stock.buy_price] %>"></td>
+      <td class="tab-head"><label for="buy_price">Buy For (£):</td>
+      <td><input type="text" size="10" min="0" name="buy_price" value="<%= "%0.2f" % [@stock.stock.buy_price] %>"></td>
     </tr>
     <tr>
-      <td><label for="sell_price">Sell For (£):</td>
-      <td><input type="text" min="0" name="sell_price" value="<%= "%0.2f" % [@stock.stock.sell_price] %>"></td>
+      <td class="tab-head"><label for="sell_price">Sell For (£):</td>
+      <td><input type="text" size="10" min="0" name="sell_price" value="<%= "%0.2f" % [@stock.stock.sell_price] %>"></td>
     </tr>
     <tr>
       <td align="right" colspan="2"><input type="submit" value="Update Stock" ></td>

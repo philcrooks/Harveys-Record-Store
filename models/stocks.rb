@@ -21,6 +21,14 @@ class Stock
     return @id
   end
 
+  def no_stock?()
+    return @stock_level == 0
+  end
+
+  def low_stock?()
+    return @stock_level <= @threshold
+  end
+
   def initialize( options )
     @id = options['id'].to_i
     @album_id = options['album_id'].to_i
