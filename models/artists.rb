@@ -20,6 +20,11 @@ class Artist
     return @id
   end
 
+  def <=>( neighbour )
+    # This should eventually deal with artist names that start with 'The' etc
+    return @name <=> neighbour.name
+  end
+
   def initialize( options )
     @id = options['id'].to_i
     @name = options['name']

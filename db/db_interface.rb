@@ -1,4 +1,5 @@
 require_relative( 'sql_runner' )
+require( 'pry-byebug' )
 
 class DbInterface
   def self.select( table, id = nil, field = "id" )
@@ -57,7 +58,7 @@ class DbInterface
     for x, y in hash
       if x != "id"
         fields += "#{x}, "
-        values += y.is_a?( Numeric ) ? "#{y}, " : "'#{y.gsub("'", "''")}', "
+        values += y.is_a?( Numeric ) ? "#{y}, " : "'%s', " % [y.gsub("'", "''")]
       end
     end
     return { :fields => fields[0..-3], :values => values[0..-3] }

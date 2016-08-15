@@ -20,6 +20,11 @@ class Album
     return @id
   end
 
+  def <=>( neighbour )
+    # This should eventually deal with albums that start with 'The' etc
+    return @name <=> neighbour.name
+  end
+
   def initialize( options )
     @id = options['id'].to_i
     @name = options['name']
@@ -28,7 +33,7 @@ class Album
 
   def self.all()
     albums = DbInterface.select( TABLE ) 
-    return albums.map { |a| Album.new( a ) }
+    return albums.map{ |a| Album.new( a ) }.sort
   end
 
   def self.by_id ( id )
@@ -38,7 +43,7 @@ class Album
 
   def self.by_artist( id )
     albums = DbInterface.select( TABLE, id, "artist_id" ) 
-    return albums.map { |a| Album.new( a ) }
+    return albums.map{ |a| Album.new( a ) }.sort
   end
 
   def self.destroy( id = nil )
