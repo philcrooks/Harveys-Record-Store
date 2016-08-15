@@ -105,7 +105,7 @@ class TestStocks < Minitest::Test
   end
 
   def test_08_format_by_artist
-    formats = Stock.format_by_artist( @artist1.id )
+    formats = Stock.formats_by_artist( @artist1.id )
     assert_equal(2, formats.count)
     assert_equal("cd", formats[0])
     assert_equal("vinyl", formats[1])

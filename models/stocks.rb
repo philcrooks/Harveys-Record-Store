@@ -58,7 +58,7 @@ class Stock
     return stock.map { | s | Stock.new( s ) }
   end
 
-  def self.format_by_artist ( artist_id )
+  def self.formats_by_artist ( artist_id )
     sql = "SELECT DISTINCT s.format FROM stocks s INNER JOIN albums a ON s.album_id = a.id WHERE a.artist_id = #{artist_id}"
     stock = SqlRunner.run( sql )
     return stock.map{ | s | s['format'] }.sort

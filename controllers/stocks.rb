@@ -19,7 +19,7 @@ end
 # INDEX
 get '/stocks' do
   # The user wants to see all the stock
-  @stock = Stock.all
+  # There will probably be multiple ways of viewing an index
   erb( :"stocks/index")
 end
 
