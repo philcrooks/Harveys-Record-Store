@@ -111,5 +111,10 @@ class TestStocks < Minitest::Test
     assert_equal("vinyl", formats[1])
   end
 
+  def test_09_stock_by_artist_and_format
+    stocks = Stock.by_artist( @artist1.id, 'vinyl' )
+    assert_equal(1, stocks.count)
+    assert_equal("Abbey Road", Album.by_id(stocks.first.album_id).name )
+  end
 
 end

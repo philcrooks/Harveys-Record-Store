@@ -51,8 +51,9 @@ class Stock
     return nil
   end
 
-  def self.by_artist ( artist_id )
+  def self.by_artist ( artist_id, format = nil )
     sql = "SELECT s.* FROM stocks s INNER JOIN albums a ON s.album_id = a.id WHERE a.artist_id = #{artist_id}"
+    sql += " AND s.format = '#{format}'" if format
     stock = SqlRunner.run( sql )
     return stock.map { | s | Stock.new( s ) }
   end
