@@ -6,7 +6,7 @@ get '/stocks/new' do
   # Show the user a form to enter stock details
   artist_id = 0
   artist_id = params['artist'].to_i if params['artist']
-  @artist = ""
+  @artist = EmptyArtist.new
   @albums = []
   if artist_id > 0
     @artist = Artist.by_id(artist_id)
@@ -18,9 +18,10 @@ end
 # CREATE
 post '/stocks' do
   # The user has POSTed the stock NEW form
-  @stock = Stock.new( params )
-  @stock.save
-  erb( :"stocks/create" )
+  stock = Stock.new( params )
+  stock.save
+  @stock = LinkedStock.new(stock)
+  erb( :"stocks/show" )
 end
 
 # INDEX
@@ -33,14 +34,13 @@ get '/stocks' do
   else
     erb( :"stocks/nestedindex")
   end
-
 end
 
 # SHOW
 get '/stocks/:id' do
   # The user wants to see the details for one stock entry
   id = params['id'].to_i
-  @stock = stock.by_id( id )
+  @stock = LinkedStock.new(stock.by_id( id ))
   erb ( :"stocks/show")
 end
 
@@ -49,8 +49,7 @@ get '/stocks/:id/edit' do
   # Show the user a form to edit stock details
   # Use the same form as the NEW page
   id = params['id'].to_i
-  @action = "/stocks/#{id}"
-  @stock = Stock.by_id( id )
+  @stock = LinkedStock.new(Stock.by_id( id ))
   erb( :"stocks/edit" )
 end
 
@@ -64,5 +63,5 @@ end
 # DELETE
 post '/stocks/:id/delete' do
   Stock.destroy( params['id'] )
-  redirect( to( "/stocks" ) )
+  redirect( to( "/stocks?index=flat" ) )
 end
