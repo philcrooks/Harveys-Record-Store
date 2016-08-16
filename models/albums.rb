@@ -63,7 +63,7 @@ class Album
   # end
 
   def self.exists?( album )
-    sql = "SELECT COUNT(*) AS count FROM albums WHERE artist_id = #{album.artist_id} AND name = '#{album.name}'"
+    sql = "SELECT COUNT(*) AS count FROM albums WHERE artist_id = #{album.artist_id} AND name = '%s'" % [album.name.gsub("'", "''")]
     result = SqlRunner.run( sql )
     return result.first['count'].to_i > 0
   end

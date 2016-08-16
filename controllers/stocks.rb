@@ -79,16 +79,8 @@ end
 # UPDATE
 post '/stocks/:id' do
   stock = Stock.new( params )
-  if !Stock.exists?( stock )
-    stock.update
-    redirect( to( "/stocks/#{@stock.id}" ) )
-  else
-    album = Album.by_id(stock.album_id)
-    artist = Artist.by_id(album.artist_id)
-    @message = "The <b>#{stock.format}</b> album <b>#{album.name}</b> by <b>#{artist.name}</b> already exists in the database."
-    @goto = "/stocks/#{stock.id}/edit"
-    erb( :error )
-  end
+  stock.update
+  redirect( to( "/stocks?index=flat" ) )
 end
 
 # DELETE

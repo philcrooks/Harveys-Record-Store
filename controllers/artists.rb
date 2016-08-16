@@ -62,14 +62,8 @@ end
 # UPDATE
 post '/artists/:id' do
   artist = Artist.new( params )
-  if !Artist.exists?( artist )
-    artist.update
-    redirect( to( "/artists" ) )
-  else
-    @message = "<b>#{artist.name}</b> already exists in the database"
-    @goto = "/artists/#{artist.id}/edit"
-    erb( :error )
-  end
+  artist.update
+  redirect( to( "/artists" ) )
 end
 
 # DELETE

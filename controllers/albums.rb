@@ -65,15 +65,8 @@ end
 # UPDATE
 post '/albums/:id' do
   album = Album.new( params )
-  if !Album.exists?(album)
-    album.update
-    redirect( to( "/albums" ) )
-  else
-    artist = Artist.by_id(album.artist_id)
-    @message = "The album <b>#{album.name}</b> by <b>#{artist.name}</b> already exists in the database."
-    @goto = "/albums/#{album.id}/edit"
-    erb( :error )
-  end
+  album.update
+  redirect( to( "/albums" ) )
 end
 
 # DELETE
