@@ -78,6 +78,11 @@ class TestArtists < Minitest::Test
     assert_equal("The Beatles", artists.first.name)
   end
 
+  def test_09_artist_exists
+    assert_equal(true, Artist.exists?(@artist1.name))
+    assert_equal(false, Artist.exists?("Coldplay"))
+  end
+
   # def test_99
   #   requests = SqlRunner.requests
   #   requests.each { | r | puts r }

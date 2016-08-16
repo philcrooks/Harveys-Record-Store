@@ -66,4 +66,10 @@ class Artist
   def self.id_range()
     return DbInterface.id_range( TABLE )
   end
+
+  def self.exists?( name )
+    sql = "SELECT COUNT(*) AS count FROM artists WHERE name = '#{name}'"
+    result = SqlRunner.run( sql )
+    return result.first['count'].to_i > 0
+  end
 end
