@@ -8,7 +8,7 @@ get '/albums/new' do
   @artists = artist_id > 0 ? [Artist.by_id(artist_id)] : Artist.all
   @action = "/albums"
   @heading = "New Album"
-  @button_text = "Create Album"
+  @button_text = "Create"
   @album = EmptyAlbum.new()
   erb( :"albums/form" )
 end
@@ -53,7 +53,7 @@ get '/albums/:id/edit' do
   @album = Album.by_id( params['id'].to_i )
   if @album 
     @action = "/albums/#{@album.id}"
-    @button_text = "Update Album"
+    @button_text = "Update"
     @artists = Artist.all
     @heading = "Edit Album"
     erb( :"albums/form" )

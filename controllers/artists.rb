@@ -4,7 +4,7 @@
 get '/artists/new' do
   # Show the user a form to enter artist details
   @action = "/artists"
-  @button_text = "Create Artist"
+  @button_text = "Create"
   @genre = Artist.genre()
   @artist = EmptyArtist.new()
   @heading = "New Artist"
@@ -50,7 +50,7 @@ get '/artists/:id/edit' do
   @artist = Artist.by_id( params['id'].to_i )
   if @artist
     @action = "/artists/#{@artist.id}"
-    @button_text = "Update Artist"
+    @button_text = "Update"
     @genre = Artist.genre()
     @heading = "Edit Artist"
     erb( :"artists/form" )
