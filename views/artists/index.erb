@@ -1,7 +1,7 @@
 <h1>Artists</h1>
 <table>
   <tr>
-    <td align="left"><a class="button" href="/artists/new">New Artist</a></td>
+    <td colspan="2" align="left"><a class="button" href="/artists/new">New Artist</a></td>
     <td colspan="2" align="right"><a class="button" href="/albums">View Albums</a></td>
   </tr>
   <% @artists.each do | artist | %>
@@ -9,6 +9,7 @@
     <td class="tab-head"><%= artist.name %></td>
     <td class="tab-head"><%= artist.genre %></td>
     <td><a href="/artists/<%= artist.id.to_s %>/edit">Edit</a></td>
+    <td><a href="/albums/new?artist=<%= artist.id.to_s %>&origin=artists">New Album</a></td>
   </tr>
   <% end %>
 </table>

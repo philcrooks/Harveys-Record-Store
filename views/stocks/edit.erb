@@ -1,5 +1,5 @@
 <h1>Update Stock</h1>
-<form action="/stocks/<%= @stock.stock.id.to_s %>" method="post">
+<form action="/stocks/<%= @stock.stock.id.to_s %>?origin=<%= @origin %>" method="post">
   <table>
     <tr>
       <td class="tab-head"><label>Artist:</label></td>

@@ -45,6 +45,7 @@ get '/stocks' do
   index_type = params['index']
   if index_type == "flat"
     @stocks = Stock.all.map{ | s | LinkedStock.new( s ) }.sort
+    @origin = "stocks"
     erb( :"stocks/flatindex")
   else
     erb( :"stocks/nestedindex")
@@ -67,6 +68,7 @@ end
 get '/stocks/:id/edit' do
   # Show the user a form to edit stock details
   # Use the same form as the NEW page
+  @origin = params['origin']
   stock = Stock.by_id( params['id'].to_i )
   if stock
     @stock = LinkedStock.new(stock)
@@ -78,9 +80,10 @@ end
 
 # UPDATE
 post '/stocks/:id' do
+  origin = params['origin']
   stock = Stock.new( params )
   stock.update
-  redirect( to( "/stocks?index=flat" ) )
+  redirect( to( "/#{origin}?index=flat" ) )
 end
 
 # DELETE

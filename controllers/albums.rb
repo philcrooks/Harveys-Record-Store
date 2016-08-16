@@ -3,10 +3,12 @@
 # NEW
 get '/albums/new' do
   # Show the user a form to enter artist details
+  origin = params['origin']
   artist_id = 0
   artist_id = params['artist'].to_i if params['artist']
   @artists = artist_id > 0 ? [Artist.by_id(artist_id)] : Artist.all
   @action = "/albums"
+  @action += "?origin=#{origin}" if origin
   @heading = "New Album"
   @button_text = "Create"
   @album = EmptyAlbum.new()
@@ -16,10 +18,11 @@ end
 # CREATE
 post '/albums' do
   # The user has POSTed the stock NEW form
+  origin = params['origin']
   album = Album.new( params )
   if !Album.exists?(album)
     album.save
-    redirect( to( "/albums" ) )
+    redirect( to( "/#{origin}" ) )
   else
     artist = Artist.by_id(album.artist_id)
     @message = "The album <b>#{album.name}</b> by <b>#{artist.name}</b> already exists in the database."
@@ -50,6 +53,7 @@ end
 get '/albums/:id/edit' do
   # Show the user a form to edit an artist
   # Use the same form as the NEW page
+  @origin = params['origin']
   @album = Album.by_id( params['id'].to_i )
   if @album 
     @action = "/albums/#{@album.id}"

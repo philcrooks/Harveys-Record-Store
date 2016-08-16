@@ -12,8 +12,13 @@ require_relative('controllers/stocks')
 require('pry-byebug')
 
 get '/' do
+  redirect( to( '/home' ) )
+end
+
+get '/home' do
   @heading = "Low Stock"
   stocks = Stock.attention_needed()
   @stocks = stocks.map{ | s | LinkedStock.new( s ) }.sort
+  @origin = "home"
   erb( :"stocks/flatindex")
 end

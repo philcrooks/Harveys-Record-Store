@@ -28,7 +28,7 @@
       <td align="right"><%= s.stock.threshold %></td>
       <td align="right"><%= "%0.2f" % [s.stock.buy_price] %></td>
       <td align="right"><%= "%0.2f" % [s.stock.sell_price] %></td>
-      <td align="center"><a href="/stocks/<%= s.stock.id.to_s %>/edit">Edit</a></td>
+      <td align="center"><a href="/stocks/<%= s.stock.id.to_s %>/edit?origin=<%= @origin %>">Edit</a></td>
     </tr>
     <% end %>
   </tbody>
