@@ -72,7 +72,8 @@ class TestAlbums < Minitest::Test
   end
 
   def test_08_album_exists
-    assert_equal(true, Album.exists?(@album1.artist_id, @album1.name))
-    assert_equal(false, Album.exists?(@album1.artist_id, "Yellow Submarine"))
+    assert_equal(true, Album.exists?(@album1))
+    @album1.name = "Yellow Submarine"
+    assert_equal(false, Album.exists?(@album1))
   end
 end

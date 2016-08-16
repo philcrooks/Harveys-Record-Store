@@ -20,10 +20,10 @@ end
 post '/stocks' do
   # The user has POSTed the stock NEW form
   stock = Stock.new( params )
-  if !Stock.exists?()
+  if !Stock.exists?(stock)
     stock.save
-    @stock = LinkedStock.new(stock)
-    erb( :"stocks/show" )
+    # @stock = LinkedStock.new(stock)
+    redirect( to( "/albums" ) )
   else
   end
 end
@@ -43,16 +43,16 @@ get '/stocks' do
 end
 
 # SHOW
-get '/stocks/:id' do
-  # The user wants to see the details for one stock entry
-  stock = Stock.by_id( params['id'].to_i )
-  if stock
-    @stock = LinkedStock.new(stock)
-    erb ( :"stocks/show")
-  else
-    halt 404, "Stock not found"
-  end
-end
+# get '/stocks/:id' do
+#   # The user wants to see the details for one stock entry
+#   stock = Stock.by_id( params['id'].to_i )
+#   if stock
+#     @stock = LinkedStock.new(stock)
+#     erb ( :"stocks/show")
+#   else
+#     halt 404, "Stock not found"
+#   end
+# end
 
 # EDIT
 get '/stocks/:id/edit' do
