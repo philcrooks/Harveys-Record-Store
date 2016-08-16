@@ -20,9 +20,12 @@ end
 post '/stocks' do
   # The user has POSTed the stock NEW form
   stock = Stock.new( params )
-  stock.save
-  @stock = LinkedStock.new(stock)
-  erb( :"stocks/show" )
+  if !Stock.exists?()
+    stock.save
+    @stock = LinkedStock.new(stock)
+    erb( :"stocks/show" )
+  else
+  end
 end
 
 # INDEX

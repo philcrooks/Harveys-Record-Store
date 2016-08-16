@@ -78,8 +78,8 @@ class Stock
     return Stock.all.select { | s | s.stock_level <= s.threshold }
   end
 
-  def self.exists?( album_id, format )
-    sql = "SELECT COUNT(*) AS count FROM stocks WHERE album_id = #{album_id} AND format = '#{format}'"
+  def self.exists?( stock )
+    sql = "SELECT COUNT(*) AS count FROM stocks WHERE album_id = #{stock.album_id} AND format = '#{stock.format}'"
     result = SqlRunner.run( sql )
     return result.first['count'].to_i > 0
   end

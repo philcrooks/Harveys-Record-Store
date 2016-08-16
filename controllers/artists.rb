@@ -15,9 +15,12 @@ end
 post '/artists' do
   # The user has POSTed the stock NEW form
   artist = Artist.new( params )
-  artist.genre.downcase!
-  artist.save
-  redirect( to( "/artists" ) )
+  if !Artist.exists?( artist )
+    artist.genre.downcase!
+    artist.save
+    redirect( to( "/artists" ) )
+  else
+  end
 end
 
 # INDEX
@@ -55,9 +58,12 @@ end
 
 # UPDATE
 post '/artists/:id' do
-  @artist = Artist.new( params )
-  @artist.update
-  redirect( to( "/artists" ) )
+  artist = Artist.new( params )
+  if !Artist.exists?( artist )
+    artist.update
+    redirect( to( "/artists" ) )
+  else
+  end
 end
 
 # DELETE

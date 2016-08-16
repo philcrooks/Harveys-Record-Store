@@ -79,8 +79,9 @@ class TestArtists < Minitest::Test
   end
 
   def test_09_artist_exists
-    assert_equal(true, Artist.exists?(@artist1.name))
-    assert_equal(false, Artist.exists?("Coldplay"))
+    assert_equal(true, Artist.exists?(@artist1))
+    @artist1.name = "Coldplay"
+    assert_equal(false, Artist.exists?(@artist1))
   end
 
   # def test_99

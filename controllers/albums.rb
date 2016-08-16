@@ -16,11 +16,12 @@ end
 # CREATE
 post '/albums' do
   # The user has POSTed the stock NEW form
-  @album = Album.new( params )
-  @album.save
-  # @artist = Artist.by_id(@album.artist_id)
-  # erb( :"albums/create" )
-  redirect( to( "/artists" ) )
+  album = Album.new( params )
+  if !Album.exists?(album)
+    album.save
+    redirect( to( "/artists" ) )
+  else
+  end
 end
 
 # INDEX
@@ -59,9 +60,12 @@ end
 
 # UPDATE
 post '/albums/:id' do
-  @album = Album.new( params )
-  @album.update
-  redirect( to( "/albums" ) )
+  album = Album.new( params )
+  if !Album.exists?(album)
+    album.update
+    redirect( to( "/albums" ) )
+  else
+  end
 end
 
 # DELETE
