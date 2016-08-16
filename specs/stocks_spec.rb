@@ -122,4 +122,9 @@ class TestStocks < Minitest::Test
     assert_equal(2, stocks.count)
   end
 
+  def test_11_stock_exists
+    assert_equal(true, Stock.exists?(@stock1.album_id, @stock1.format))
+    assert_equal(false, Stock.exists?(@stock3.album_id, 'vinyl'))
+  end
+
 end
