@@ -44,6 +44,7 @@ class Artist
 
   def self.by_id( id )
     artists = DbInterface.select( TABLE, id )
+    return nil if artists.count == 0
     return Artist.new( artists.first )
   end
 
@@ -63,9 +64,9 @@ class Artist
     return artists.map{ |a| Artist.new( a )}.sort
   end
 
-  def self.id_range()
-    return DbInterface.id_range( TABLE )
-  end
+  # def self.id_range()
+  #   return DbInterface.id_range( TABLE )
+  # end
 
   def self.exists?( name )
     sql = "SELECT COUNT(*) AS count FROM artists WHERE name = '#{name}'"

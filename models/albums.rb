@@ -58,9 +58,9 @@ class Album
     return nil
   end
 
-  def self.id_range()
-    return DbInterface.id_range( TABLE )
-  end
+  # def self.id_range()
+  #   return DbInterface.id_range( TABLE )
+  # end
 
   def self.exists?( artist_id, name )
     sql = "SELECT COUNT(*) AS count FROM albums WHERE artist_id = #{artist_id} AND name = '#{name}'"
