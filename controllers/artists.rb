@@ -20,6 +20,9 @@ post '/artists' do
     artist.save
     redirect( to( "/artists" ) )
   else
+    @message = "<b>#{artist.name}</b> already exists in the database"
+    @goto = "/artists/new"
+    erb( :error )
   end
 end
 
@@ -63,6 +66,9 @@ post '/artists/:id' do
     artist.update
     redirect( to( "/artists" ) )
   else
+    @message = "<b>#{artist.name}</b> already exists in the database"
+    @goto = "/artists/#{artist.id}/edit"
+    erb( :error )
   end
 end
 

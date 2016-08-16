@@ -6,12 +6,15 @@ get '/stocks/new' do
   # Show the user a form to enter stock details
   album_id = 0
   album_id = params['album'].to_i if params['album']
-  @album = EmptyAlbum.new
-  @albums = []
   if album_id > 0
     @album = Album.by_id(album_id)
     @artist = Artist.by_id(@album.artist_id)
     @albums = Album.by_artist(@album.artist_id)
+  else
+    # This code will stop a crash but won't be very useful without an artist
+    @album = EmptyAlbum.new
+    @artist = EmptyArtist.new
+    @albums = []
   end
   erb( :"stocks/new" )
 end
@@ -25,6 +28,12 @@ post '/stocks' do
     # @stock = LinkedStock.new(stock)
     redirect( to( "/albums" ) )
   else
+    # Want to tell the user of their mistake and take them back to the /stocks/new page
+    album = Album.by_id(stock.album_id)
+    artist = Artist.by_id(album.artist_id)
+    @message = "The <b>#{stock.format}</b> album <b>#{album.name}</b> by <b>#{artist.name}</b> already exists in the database."
+    @goto = "/albums"
+    erb( :error )
   end
 end
 
@@ -69,9 +78,17 @@ end
 
 # UPDATE
 post '/stocks/:id' do
-  @stock = Stock.new( params )
-  @stock.update
-  redirect( to( "/stocks/#{@stock.id}" ) )
+  stock = Stock.new( params )
+  if !Stock.exists?( stock )
+    stock.update
+    redirect( to( "/stocks/#{@stock.id}" ) )
+  else
+    album = Album.by_id(stock.album_id)
+    artist = Artist.by_id(album.artist_id)
+    @message = "The <b>#{stock.format}</b> album <b>#{album.name}</b> by <b>#{artist.name}</b> already exists in the database."
+    @goto = "/stocks/#{stock.id}/edit"
+    erb( :error )
+  end
 end
 
 # DELETE

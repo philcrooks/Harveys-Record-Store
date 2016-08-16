@@ -21,6 +21,10 @@ post '/albums' do
     album.save
     redirect( to( "/artists" ) )
   else
+    artist = Artist.by_id(album.artist_id)
+    @message = "The album <b>#{album.name}</b> by <b>#{artist.name}</b> already exists in the database."
+    @goto = "/albums/new"
+    erb( :error )
   end
 end
 
@@ -65,6 +69,10 @@ post '/albums/:id' do
     album.update
     redirect( to( "/albums" ) )
   else
+    artist = Artist.by_id(album.artist_id)
+    @message = "The album <b>#{album.name}</b> by <b>#{artist.name}</b> already exists in the database."
+    @goto = "/albums/#{album.id}/edit"
+    erb( :error )
   end
 end
 
