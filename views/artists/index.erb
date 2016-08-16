@@ -3,15 +3,13 @@
   <tr>
     <td><a href="/artists/new">New Artist</a></td>
     <td>&nbsp;</td>
-    <td>&nbsp;</td>
     <td><a href="/albums">View Albums</a></td>
   </tr>
   <% @artists.each do | artist | %>
   <tr>
     <td class="tab-head"><%= artist.name %></td>
     <td class="tab-head"><%= artist.genre %></td>
-    <td><a href="/artists/<%= artist.id.to_s %>/edit">Edit Artist</a></td>
-    <td><a href="/albums/new?artist=<%= artist.id.to_s %>">New Album</a></td>
+    <td><a href="/artists/<%= artist.id.to_s %>/edit">Edit</a></td>
   </tr>
   <% end %>
 </table>
