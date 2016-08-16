@@ -7,6 +7,7 @@ get '/artists/new' do
   @button_text = "Create Artist"
   @genre = Artist.genre()
   @artist = EmptyArtist.new()
+  @heading = "New Artist"
   erb( :"artists/form" )
 end
 
@@ -46,6 +47,7 @@ get '/artists/:id/edit' do
     @button_text = "Update Artist"
     @genre = Artist.genre()
     @artist = Artist.by_id( id )
+    @heading = "Edit Artist"
     erb( :"artists/form" )
   end
 end
