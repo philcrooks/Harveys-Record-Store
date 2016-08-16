@@ -17,16 +17,17 @@ post '/albums' do
   # The user has POSTed the stock NEW form
   @album = Album.new( params )
   @album.save
-  @artist = Artist.by_id(@album.artist_id)
-  erb( :"albums/create" )
+  # @artist = Artist.by_id(@album.artist_id)
+  # erb( :"albums/create" )
+  redirect( to( "/artists" ) )
 end
 
 # INDEX
-# get '/albums' do
-#   # The user wants to see all the stock
-#   @album = Album.all
-#   erb( :"albums/index")
-# end
+get '/albums' do
+  # The user wants to see all the stock
+  @albums = Album.all
+  erb( :"albums/index")
+end
 
 # SHOW
 get '/albums/:id' do

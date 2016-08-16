@@ -27,14 +27,14 @@ get '/artists' do
 end
 
 # SHOW
-get '/artists/:id' do
-  # The user wants to see the details for one artist
-  id = params['id'].to_i
-  if Artist.id_range.member?( id )
-    @artist = Artist.by_id( id )
-    erb ( :"artists/show")
-  end
-end
+# get '/artists/:id' do
+#   # The user wants to see the details for one artist
+#   id = params['id'].to_i
+#   if Artist.id_range.member?( id )
+#     @artist = Artist.by_id( id )
+#     erb ( :"artists/show")
+#   end
+# end
 
 # EDIT
 get '/artists/:id/edit' do
@@ -54,7 +54,7 @@ end
 post '/artists/:id' do
   @artist = Artist.new( params )
   @artist.update
-  redirect( to( "/artists/#{@artist.id}" ) )
+  redirect( to( "/artists" ) )
 end
 
 # DELETE
