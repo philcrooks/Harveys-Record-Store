@@ -1,0 +1,34 @@
+<h1>Stock Report</h1>
+<% genres = Artist.genre %>
+<ul class="genre_list">
+  <% genres.each do | genre | %>
+  <li class="genre_element">
+    <p><%= genre %></p>
+    <% artists = Artist.by_genre(genre) %>
+    <ul class="artist_list">
+      <% artists.each do | artist | %>
+      <li class="artist_element">
+        <p><%= artist.name %></p>
+        <% formats = Stock.formats_by_artist(artist.id) %>
+        <ul class="format_list">
+          <% formats.each do | format | %>
+          <li>
+            <p><%= format %></p>
+            <% stocks = Stock.by_artist(artist.id, format) %>
+            <ul class="stock_list">
+              <% stocks.each do | stock | %>
+              <li>
+                <% album = Album.by_id(stock.album_id) %>
+                <%= album.name %>
+              </li>
+              <% end %>
+            </ul>
+          </li>
+          <% end %>
+        </ul>
+      </li>
+      <% end %>
+    </ul>
+  </li>
+  <% end %>
+</ul>
