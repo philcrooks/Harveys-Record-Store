@@ -28,19 +28,19 @@ class TestStocks < Minitest::Test
     # Create stock for the stock tests. Relying on destroy and save working
 
     Stock.destroy()
-    @stock1 = Stock.new( { 'album_id' => @album1.id, 'format' => 'cd', 'stock_level' => 5, 'threshold' => 5, 'buy_price' => 5.00, 'sell_price' => 7.50 } )
+    @stock1 = Stock.new( { 'album_id' => @album1.id, 'format' => 'CD', 'stock_level' => 5, 'threshold' => 5, 'buy_price' => 5.00, 'sell_price' => 7.50 } )
     @stock1.save
-    @stock2 = Stock.new( { 'album_id' => @album1.id, 'format' => 'vinyl', 'stock_level' => 4, 'threshold' => 3, 'buy_price' => 7.00, 'sell_price' => 15.00 } )
+    @stock2 = Stock.new( { 'album_id' => @album1.id, 'format' => 'LP', 'stock_level' => 4, 'threshold' => 3, 'buy_price' => 7.00, 'sell_price' => 15.00 } )
     @stock2.save
-    @stock3 = Stock.new( { 'album_id' => @album2.id, 'format' => 'cd', 'stock_level' => 3, 'threshold' => 5, 'buy_price' => 5.00, 'sell_price' => 10.00 } )
+    @stock3 = Stock.new( { 'album_id' => @album2.id, 'format' => 'CD', 'stock_level' => 3, 'threshold' => 5, 'buy_price' => 5.00, 'sell_price' => 10.00 } )
     @stock3.save
-    @stock4 = Stock.new( { 'album_id' => @album3.id, 'format' => 'cd', 'stock_level' => 1, 'threshold' => 2, 'buy_price' => 7.00, 'sell_price' => 10.00 } )
+    @stock4 = Stock.new( { 'album_id' => @album3.id, 'format' => 'CD', 'stock_level' => 1, 'threshold' => 2, 'buy_price' => 7.00, 'sell_price' => 10.00 } )
   end
 
   def test_01_stock_initalize
     # Make sure that all the fields can be read
     assert_equal(@album3.id, @stock4.album_id)
-    assert_equal('cd', @stock4.format)
+    assert_equal('CD', @stock4.format)
     assert_equal(1, @stock4.stock_level)
     assert_equal(2, @stock4.threshold)
     assert_equal(7.00, @stock4.buy_price)
@@ -107,12 +107,12 @@ class TestStocks < Minitest::Test
   def test_08_format_by_artist
     formats = Stock.formats_by_artist( @artist1.id )
     assert_equal(2, formats.count)
-    assert_equal("cd", formats[0])
-    assert_equal("vinyl", formats[1])
+    assert_equal("CD", formats[0])
+    assert_equal("LP", formats[1])
   end
 
   def test_09_stock_by_artist_and_format
-    stocks = Stock.by_artist( @artist1.id, 'vinyl' )
+    stocks = Stock.by_artist( @artist1.id, 'LP' )
     assert_equal(1, stocks.count)
     assert_equal("Abbey Road", Album.by_id(stocks.first.album_id).name )
   end
