@@ -12,6 +12,7 @@ require_relative('controllers/stocks')
 require('pry-byebug')
 
 get '/' do
+  @heading = "Low Stock"
   stocks = Stock.attention_needed()
   @stocks = stocks.map{ | s | LinkedStock.new( s ) }.sort
   erb( :"stocks/flatindex")

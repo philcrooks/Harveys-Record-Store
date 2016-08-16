@@ -57,8 +57,8 @@ end
 # UPDATE
 post '/albums/:id' do
   @album = Album.new( params )
-  @Album.update
-  redirect( to( "/albums/#{@Album.id}" ) )
+  @album.update
+  redirect( to( "/albums" ) )
 end
 
 # DELETE

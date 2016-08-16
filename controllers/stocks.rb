@@ -4,13 +4,14 @@
 # NEW
 get '/stocks/new' do
   # Show the user a form to enter stock details
-  artist_id = 0
-  artist_id = params['artist'].to_i if params['artist']
-  @artist = EmptyArtist.new
+  album_id = 0
+  album_id = params['album'].to_i if params['album']
+  @album = EmptyAlbum.new
   @albums = []
-  if artist_id > 0
-    @artist = Artist.by_id(artist_id)
-    @albums = Album.by_artist(artist_id)
+  if album_id > 0
+    @album = Album.by_id(album_id)
+    @artist = Artist.by_id(@album.artist_id)
+    @albums = Album.by_artist(@album.artist_id)
   end
   erb( :"stocks/new" )
 end
@@ -28,6 +29,7 @@ end
 get '/stocks' do
   # The user wants to see all the stock
   # There will probably be multiple ways of viewing an index
+  @heading = "Stock List"
   index_type = params['index']
   if index_type == "flat"
     @stocks = Stock.all.map{ | s | LinkedStock.new( s ) }.sort
