@@ -31,28 +31,29 @@ get '/albums' do
 end
 
 # SHOW
-get '/albums/:id' do
-  # The user wants to see the details for one artist
-  id = params['id'].to_i
-  if Album.id_range.member?( id )
-    @album = Album.by_id( id )
-    @artist = Artist.by_id( @album.artist_id )
-    erb ( :"albums/show")
-  end
-end
+# get '/albums/:id' do
+#   # The user wants to see the details for one artist
+#   id = params['id'].to_i
+#   if Album.id_range.member?( id )
+#     @album = Album.by_id( id )
+#     @artist = Artist.by_id( @album.artist_id )
+#     erb ( :"albums/show")
+#   end
+# end
 
 # EDIT
 get '/albums/:id/edit' do
   # Show the user a form to edit an artist
   # Use the same form as the NEW page
-  id = params['id'].to_i
-  if Album.id_range.member?( id )
-    @action = "/albums/#{id}"
+  @album = Album.by_id( params['id'].to_i )
+  if @album 
+    @action = "/albums/#{@album.id}"
     @button_text = "Update Album"
-    @album = Album.by_id( id )
     @artists = Artist.all
     @heading = "Edit Album"
     erb( :"albums/form" )
+  else
+    halt 404, "Album not found"
   end
 end
 
@@ -65,8 +66,11 @@ end
 
 # DELETE
 post '/albums/:id/delete' do
-  if Album.id_range.member?( id )
-    Album.destroy( params['id'].to_i )
+  album = Album.by_id( params['id'].to_i )
+  if album
+    Album.destroy( album.id )
     redirect( to( "/albums" ) )
+  else
+    halt 404, "Album not found"
   end
 end

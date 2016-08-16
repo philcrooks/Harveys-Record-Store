@@ -42,18 +42,26 @@ end
 # SHOW
 get '/stocks/:id' do
   # The user wants to see the details for one stock entry
-  id = params['id'].to_i
-  @stock = LinkedStock.new(Stock.by_id( id ))
-  erb ( :"stocks/show")
+  stock = Stock.by_id( params['id'].to_i )
+  if stock
+    @stock = LinkedStock.new(stock)
+    erb ( :"stocks/show")
+  else
+    halt 404, "Stock not found"
+  end
 end
 
 # EDIT
 get '/stocks/:id/edit' do
   # Show the user a form to edit stock details
   # Use the same form as the NEW page
-  id = params['id'].to_i
-  @stock = LinkedStock.new(Stock.by_id( id ))
-  erb( :"stocks/edit" )
+  stock = Stock.by_id( params['id'].to_i )
+  if stock
+    @stock = LinkedStock.new(stock)
+    erb( :"stocks/edit" )
+  else
+    halt 404, "Stock not found"
+  end
 end
 
 # UPDATE
@@ -65,6 +73,11 @@ end
 
 # DELETE
 post '/stocks/:id/delete' do
-  Stock.destroy( params['id'] )
-  redirect( to( "/stocks?index=flat" ) )
+  stock = Stock.by_id( params['id'].to_i )
+  if stock
+    Stock.destroy( stock.id )
+    redirect( to( "/stocks?index=flat" ) )
+  else
+    halt 404, "Stock not found"
+  end
 end

@@ -41,14 +41,15 @@ end
 get '/artists/:id/edit' do
   # Show the user a form to edit an artist
   # Use the same form as the NEW page
-  id = params['id'].to_i
-  if Artist.id_range.member?( id )
-    @action = "/artists/#{id}"
+  @artist = Artist.by_id( params['id'].to_i )
+  if @artist
+    @action = "/artists/#{@artist.id}"
     @button_text = "Update Artist"
     @genre = Artist.genre()
-    @artist = Artist.by_id( id )
     @heading = "Edit Artist"
     erb( :"artists/form" )
+  else
+    halt 404, "Artist not found"
   end
 end
 
@@ -60,9 +61,12 @@ post '/artists/:id' do
 end
 
 # DELETE
-# post '/artists/:id/delete' do
-#   if Artist.id_range.member?( id )
-#     Artist.destroy( params['id'].to_i )
-#     redirect( to( "/artists" ) )
-#   end
-# end
+post '/artists/:id/delete' do
+  artist = Artist.by_id( params['id'].to_i )
+  if artist
+    Artist.destroy( artist.id )
+    redirect( to( "/artists" ) )
+  else
+    halt 404, "Artist not found"
+  end
+end

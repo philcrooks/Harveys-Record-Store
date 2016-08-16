@@ -43,7 +43,8 @@ class Album
   end
 
   def self.by_id ( id )
-    albums = DbInterface.select( TABLE, id ) 
+    albums = DbInterface.select( TABLE, id )
+    return nil if albums.count == 0
     return Album.new(albums.first)
   end
 

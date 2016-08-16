@@ -46,6 +46,7 @@ class Stock
 
   def self.by_id( id )
     stock = DbInterface.select( TABLE, id )
+    return nil if stock.count == 0
     return Stock.new( stock.first )
   end
 
