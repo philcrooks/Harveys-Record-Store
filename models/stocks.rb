@@ -68,6 +68,12 @@ class Stock
     return stock.map { | s | Stock.new( s ) }
   end
 
+  def self.by_genre( genre )
+    sql = "SELECT s.* FROM stocks s INNER JOIN albums al ON s.album_id = al.id INNER JOIN artists ar ON al.artist_id = ar.id WHERE ar.genre = '%s'" % [genre.gsub("'", "''")]
+    stock = SqlRunner.run( sql )
+    return stock.map { | s | Stock.new( s ) }
+  end
+
   def self.formats_by_artist( artist_id )
     sql = "SELECT DISTINCT s.format FROM stocks s INNER JOIN albums a ON s.album_id = a.id WHERE a.artist_id = #{artist_id}"
     stock = SqlRunner.run( sql )
@@ -89,7 +95,7 @@ class Stock
     stock_level = stocks.inject(0) { | total, s | total += s.stock_level }
     buy_for = stocks.inject(0) { | total, s | total += s.stock_level * s.buy_price }
     sell_for = stocks.inject(0) { | total, s | total += s.stock_level * s.sell_price }
-    margin = (sell_for == 0) ? 0 : (((sell_for - buy_for) * 100.0) / sell_for).round
+    margin = (sell_for == 0) ? 0 : (((sell_for - buy_for) * 100.0) / sell_for).round(2)
     return {level: stock_level, value: sell_for - buy_for, margin: margin }
   end
 end

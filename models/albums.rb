@@ -21,9 +21,10 @@ class Album
   end
 
   def compare_name()
-    return @name[4..-1] if @name.downcase.start_with?("the ")
-    return @name[1..-1] if @name.downcase.start_with?("a ")
-    return @name
+    name = @name.downcase
+    return name[4..-1] if name.start_with?("the ")
+    return name[1..-1] if name.start_with?("a ")
+    return name
   end
 
   def <=>( neighbour )
