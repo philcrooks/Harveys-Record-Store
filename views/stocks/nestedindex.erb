@@ -1,25 +1,37 @@
 <h1>Stock Report</h1>
 <table>
 <% genres = Artist.genre; genres.each do | genre | %>
-  <tr><td colspan="5" class="indent1"><%= genre.capitalize %></td></tr>
+  <tr>
+    <td colspan="2" class="indent1"><%= genre.capitalize %></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
   <% artists = Artist.by_genre(genre); artists.each do | artist | %>
-  <tr><td colspan="5" class="indent2"><b><%= artist.name %></b></td></tr>
-    <% formats = Stock.formats_by_artist(artist.id) %>
-    <% if formats.count == 0 %>
-  <tr><td colspan="5" class="indent3">No stock</td></tr>
-    <% else %>
+    <% artist_stocks = Stock.by_artist(artist.id); artist_analysis = Stock.analytics(artist_stocks); formats = Stock.formats_by_artist(artist.id) %>
+  <tr>
+    <td colspan="2" class="indent2"><b><%= artist.name %></b></td>
+    <% if formats.count > 0 %>
+    <td align="right"><%= artist_analysis[:level] %></td>
+    <td align="right">£<%= "%0.2f" % [artist_analysis[:value]] %></td>
+    <td align="right"><%= "#{artist_analysis[:margin]}%" %></td>
+  </tr>
       <% formats.each do | format | %>
-        <% stocks = Stock.by_artist(artist.id, format); stocks.each do | stock | %>
-          <% album = Album.by_id(stock.album_id) %>
+        <% format_stocks = Stock.by_artist(artist.id, format); format_stocks.each do | stock | %>
+          <% album = Album.by_id(stock.album_id); album_analysis = Stock.analytics([stock]) %>
   <tr>
     <td class="indent3"><%= format %></td>
     <td><%= album.name %></td>
-    <td align="right"><%= stock.stock_level.to_s %></td>
-    <td align="right">£<%= "%0.2f" % [stock.sell_price] %></td>
-    <td align="right"><%= "#{(((stock.sell_price - stock.buy_price)*100)/stock.sell_price).round}%" %></td>
+    <td align="right"><%= album_analysis[:level] %></td>
+    <td align="right">£<%= "%0.2f" % [album_analysis[:value]] %></td>
+    <td align="right"><%= "#{album_analysis[:margin]}%" %></td>
   </tr>
         <% end %>
       <% end %>
+    <% else %>
+  <tr>
+    <td colspan="5" class="indent3">No stock</td>
+  </tr>
     <% end %>
   <% end %>
 <% end %>
