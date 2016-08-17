@@ -9,6 +9,7 @@ require_relative('models/linked_stocks')
 require_relative('controllers/artists')
 require_relative('controllers/albums')
 require_relative('controllers/stocks')
+require ('open-uri')
 require('pry-byebug')
 
 get '/' do

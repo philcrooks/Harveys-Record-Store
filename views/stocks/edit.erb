@@ -15,19 +15,19 @@
     </tr>
     <tr>
       <td class="tab-head"><label for="stock_level">Stock Level:</label></td>
-      <td><input type="text" size="10" min="0" name="stock_level" value="<%= @stock.stock.stock_level.to_s %>"></td>
+      <td><input type="text" class="borderbox" size="10" min="0" name="stock_level" value="<%= @stock.stock.stock_level.to_s %>"></td>
     </tr>
     <tr>
       <td class="tab-head"><label for="threshold">Stock Theshold:</td>
-      <td><input type="text" size="10" min="0" name="threshold" value="<%= @stock.stock.threshold.to_s %>"></td>
+      <td><input type="text" class="borderbox" size="10" min="0" name="threshold" value="<%= @stock.stock.threshold.to_s %>"></td>
     </tr>
     <tr>
       <td class="tab-head"><label for="buy_price">Buy For (£):</td>
-      <td><input type="text" size="10" min="0" name="buy_price" value="<%= "%0.2f" % [@stock.stock.buy_price] %>"></td>
+      <td><input type="text" class="borderbox" size="10" min="0" name="buy_price" value="<%= "%0.2f" % [@stock.stock.buy_price] %>"></td>
     </tr>
     <tr>
       <td class="tab-head"><label for="sell_price">Sell For (£):</td>
-      <td><input type="text" size="10" min="0" name="sell_price" value="<%= "%0.2f" % [@stock.stock.sell_price] %>"></td>
+      <td><input type="text" class="borderbox" size="10" min="0" name="sell_price" value="<%= "%0.2f" % [@stock.stock.sell_price] %>"></td>
     </tr>
     <tr>
       <td align="left">&nbsp;</td><td align="right"><input type="submit" class="button" value="Update" ></td>

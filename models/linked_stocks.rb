@@ -1,5 +1,6 @@
 require_relative( 'artists' )
 require_relative( 'albums' )
+# require('regexp')
 # require_relative( 'stocks' )
 
 class LinkedStock
@@ -17,5 +18,10 @@ class LinkedStock
     @stock = stock
     @album = Album.by_id(@stock.album_id)
     @artist = Artist.by_id(@album.artist_id)
+  end
+
+  def self.filter( stocks, string )
+    regex = Regexp.new(Regexp.escape(string.downcase))
+    return stocks.select { | s | regex =~ s.artist.name.downcase || regex =~ s.album.name.downcase  }
   end
 end

@@ -60,12 +60,12 @@ th {
 
 /* LAYOUT */
 .no-stock {
-  background-color: #ff5050;
+  background-color: #ff6060;
   color: black;
 }
 
 .low-stock {
-  background-color: #ffcc00;
+  background-color: #ffdd22;
   color: black;
 }
 
@@ -142,4 +142,11 @@ th {
 }
 .level1 {
   color: blue;
+}
+.borderbox {
+  border-style: solid;
+  border-color: #cccccc;
+  border-width: 1px;
+  font-size: 14px;
+  }
 }

@@ -42,9 +42,13 @@ get '/stocks' do
   # The user wants to see all the stock
   # There will probably be multiple ways of viewing an index
   @heading = "Stock List"
+  @filter = params['filter']
   index_type = params['index']
   if index_type == "flat"
     @stocks = Stock.all.map{ | s | LinkedStock.new( s ) }.sort
+    if @filter && @filter != ""
+      @stocks = LinkedStock.filter(@stocks, @filter)
+    end
     @origin = "stocks"
     erb( :"stocks/flatindex")
   else
@@ -79,6 +83,18 @@ get '/stocks/:id/edit' do
   end
 end
 
+# SEARCH
+post '/stocks/search' do
+  # This is not RESTful but gets round the lack of code on the client side
+  filter_string = params['filter_string']
+  next_page = '/stocks?index=flat'
+  if filter_string && filter_string != ""
+    next_page += "&filter=#{filter_string}"
+    next_page = URI::encode( next_page )
+  end
+  redirect( to( next_page ) )
+end
+
 # UPDATE
 post '/stocks/:id' do
   origin = params['origin']
@@ -97,3 +113,4 @@ post '/stocks/:id/delete' do
     halt 404, "Stock not found"
   end
 end
+

@@ -3,12 +3,12 @@
   <table>
     <tr>
       <td class="tab-head"><label for="name">Name:</label></td>
-      <td><input type="text" name="name" <%= "value=\"#{@artist.name}\"" if @artist.name %>></td>
+      <td><input type="text" class="borderbox" name="name" <%= "value=\"#{@artist.name}\"" if @artist.name %>></td>
     </tr>
     <tr>
       <td class="tab-head"><label for="genre">Genre:</label></td>
       <td>
-        <input list="genre_list" name="genre"
+        <input class="borderbox" list="genre_list" name="genre"
         <%= "value=\"#{@artist.genre}\"" if @artist.genre %>>
         <datalist id="genre_list">
           <% @genre.each do | gen | %>

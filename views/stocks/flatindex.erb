@@ -1,6 +1,16 @@
 <h1><%= @heading %></h1>
 <table>
   <thead>
+    <%if @origin != "home" %>
+    <tr>
+      <td colspan="9" align="right">
+        <form action="/stocks/search" method="post">
+          <input type="text" class="borderbox" size="20" name="filter_string" value="<%= @filter %>">
+          <input type="submit" class="button" value="Filter" >
+        </form>
+      </td>
+    </tr>
+    <% end %>
     <tr>
        <th>Artist</th>
        <th>Album</th>

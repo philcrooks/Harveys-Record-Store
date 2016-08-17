@@ -4,7 +4,7 @@
     <tr>
       <td class="tab-head"><label for="artist_id">Artist:</label></td>
       <td>
-        <select name="artist_id">
+        <select class="borderbox" name="artist_id">
           <% @artists.each do | artist | %>
           <option value="<%= artist.id %> "
           <% if artist.id == @album.artist_id %>
@@ -17,7 +17,7 @@
     </tr>
     <tr>
       <td class="tab-head"><label for="name">Title:</label></td>
-      <td><input size="40" type="text" name="name"
+      <td><input size="40" type="text" class="borderbox" name="name"
       <% if @album.name %>
       <%= "value=\"#{@album.name}\"" %>
       <% end %>
