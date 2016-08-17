@@ -38,6 +38,8 @@ class Album
     @artist_id = options['artist_id'].to_i
   end
 
+  # Class methods start here
+
   def self.all()
     albums = DbInterface.select( TABLE ) 
     return albums.map{ |a| Album.new( a ) }.sort
@@ -58,10 +60,6 @@ class Album
     DbInterface.delete( TABLE, id )
     return nil
   end
-
-  # def self.id_range()
-  #   return DbInterface.id_range( TABLE )
-  # end
 
   def self.exists?( album )
     sql = "SELECT COUNT(*) AS count FROM albums WHERE artist_id = #{album.artist_id} AND name = '%s'" % [album.name.gsub("'", "''")]

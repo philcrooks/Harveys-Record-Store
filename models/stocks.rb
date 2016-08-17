@@ -39,6 +39,8 @@ class Stock
     @sell_price = options['sell_price'].to_f
   end
 
+# Class methods start here
+
   def self.all()
     stock = DbInterface.select( TABLE )
     return stock.map { |s| Stock.new( s ) }
@@ -60,6 +62,18 @@ class Stock
     return nil
   end
 
+  def self.attention_needed()
+    return Stock.all.select { | s | s.stock_level <= s.threshold }
+  end
+
+  def self.exists?( stock )
+    sql = "SELECT COUNT(*) AS count FROM stocks WHERE album_id = #{stock.album_id} AND format = '#{stock.format}'"
+    result = SqlRunner.run( sql )
+    return result.first['count'].to_i > 0
+  end
+
+  # Methods needed by the Stock Report start here
+
   def self.by_artist( artist_id, format = nil )
     sql = "SELECT s.* FROM stocks s INNER JOIN albums a ON s.album_id = a.id WHERE a.artist_id = #{artist_id}"
     sql += " AND s.format = '#{format}'" if format
@@ -78,16 +92,6 @@ class Stock
     sql = "SELECT DISTINCT s.format FROM stocks s INNER JOIN albums a ON s.album_id = a.id WHERE a.artist_id = #{artist_id}"
     stock = SqlRunner.run( sql )
     return stock.map{ | s | s['format'] }.sort
-  end
-
-  def self.attention_needed()
-    return Stock.all.select { | s | s.stock_level <= s.threshold }
-  end
-
-  def self.exists?( stock )
-    sql = "SELECT COUNT(*) AS count FROM stocks WHERE album_id = #{stock.album_id} AND format = '#{stock.format}'"
-    result = SqlRunner.run( sql )
-    return result.first['count'].to_i > 0
   end
 
   def self.analytics ( stocks )
