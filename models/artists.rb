@@ -23,7 +23,7 @@ class Artist
   def compare_name()
     name = @name.downcase
     return name[4..-1] if name.start_with?("the ")
-    return name[1..-1] if name.start_with?("a ")
+    return name[2..-1] if name.start_with?("a ")
     return name
   end
 
