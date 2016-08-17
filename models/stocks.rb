@@ -83,4 +83,13 @@ class Stock
     result = SqlRunner.run( sql )
     return result.first['count'].to_i > 0
   end
+
+  def self.analytics ( stocks )
+    return nil if stocks.count == 0
+    stock_level = stocks.inject(0) { | total, s | total += s.stock_level }
+    buy_for = stocks.inject(0) { | total, s | total += s.stock_level * s.buy_price }
+    sell_for = stocks.inject(0) { | total, s | total += s.stock_level * s.sell_price }
+    margin = (sell_for == 0) ? 0 : (((sell_for - buy_for) * 100.0) / sell_for).round
+    return {level: stock_level, value: sell_for - buy_for, margin: margin }
+  end
 end

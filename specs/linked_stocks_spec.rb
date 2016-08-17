@@ -29,13 +29,13 @@ class TestLinkedStocks < Minitest::Test
     # Create stock for the stock tests. Relying on destroy and save working
 
     Stock.destroy()
-    @stock1 = Stock.new( { 'album_id' => @album1.id, 'format' => 'cd', 'stock_level' => 5, 'threshold' => 5, 'buy_price' => 5.00, 'sell_price' => 7.50 } )
+    @stock1 = Stock.new( { 'album_id' => @album1.id, 'format' => 'CD', 'stock_level' => 5, 'threshold' => 5, 'buy_price' => 5.00, 'sell_price' => 7.50 } )
     @stock1.save
-    @stock2 = Stock.new( { 'album_id' => @album1.id, 'format' => 'vinyl', 'stock_level' => 2, 'threshold' => 3, 'buy_price' => 7.00, 'sell_price' => 15.00 } )
+    @stock2 = Stock.new( { 'album_id' => @album1.id, 'format' => 'LP', 'stock_level' => 2, 'threshold' => 3, 'buy_price' => 7.00, 'sell_price' => 15.00 } )
     @stock2.save
-    @stock3 = Stock.new( { 'album_id' => @album2.id, 'format' => 'cd', 'stock_level' => 5, 'threshold' => 5, 'buy_price' => 5.00, 'sell_price' => 10.00 } )
+    @stock3 = Stock.new( { 'album_id' => @album2.id, 'format' => 'CD', 'stock_level' => 5, 'threshold' => 5, 'buy_price' => 5.00, 'sell_price' => 10.00 } )
     @stock3.save
-    @stock4 = Stock.new( { 'album_id' => @album3.id, 'format' => 'cd', 'stock_level' => 1, 'threshold' => 2, 'buy_price' => 7.00, 'sell_price' => 10.00 } )
+    @stock4 = Stock.new( { 'album_id' => @album3.id, 'format' => 'CD', 'stock_level' => 1, 'threshold' => 2, 'buy_price' => 7.00, 'sell_price' => 10.00 } )
     @linked_stocks = []
     @linked_stocks << LinkedStock.new(@stock1)
     @linked_stocks << LinkedStock.new(@stock2)
@@ -54,9 +54,9 @@ class TestLinkedStocks < Minitest::Test
     stocks = @linked_stocks.sort
     assert_equal("Muddy Waters", stocks[0].artist.name)
     assert_equal("Abbey Road", stocks[1].album.name)
-    assert_equal("cd", stocks[1].stock.format)
+    assert_equal("CD", stocks[1].stock.format)
     assert_equal("Abbey Road", stocks[2].album.name)
-    assert_equal("vinyl", stocks[2].stock.format)
+    assert_equal("LP", stocks[2].stock.format)
     assert_equal("The Beatles", stocks[3].album.name)
   end
 end  

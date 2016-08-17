@@ -53,16 +53,17 @@ get '/stocks' do
 end
 
 # SHOW
-# get '/stocks/:id' do
-#   # The user wants to see the details for one stock entry
-#   stock = Stock.by_id( params['id'].to_i )
-#   if stock
-#     @stock = LinkedStock.new(stock)
-#     erb ( :"stocks/show")
-#   else
-#     halt 404, "Stock not found"
-#   end
-# end
+get '/stocks/:id' do
+  # The user wants to see the details for one stock entry
+  # Assume the user wants to delete it
+  stock = Stock.by_id( params['id'].to_i )
+  if stock
+    @stock = LinkedStock.new(stock)
+    erb ( :"stocks/delete")
+  else
+    halt 404, "Stock not found"
+  end
+end
 
 # EDIT
 get '/stocks/:id/edit' do
