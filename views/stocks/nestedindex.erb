@@ -1,5 +1,11 @@
 <h1>Stock Report</h1>
 <table>
+  <tr>
+    <td colspan="2" class="tab-head">&nbsp;</td>
+    <td class="tab-head" align="center">Units</td>
+    <td class="tab-head" align="center">Mark-up</td>
+    <td class="tab-head" align="center">Margin</td>
+  </tr>
 <% genres = Artist.genre; genres.each do | genre | %>
   <% genre_stocks = Stock.by_genre( genre ); genre_analysis = Stock.analytics( genre_stocks ) %>
   <tr>
