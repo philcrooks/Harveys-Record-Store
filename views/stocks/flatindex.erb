@@ -10,6 +10,9 @@
        <th>Buy For (£)</th>
        <th>Sell For (£)</th>
        <th>&nbsp;</th>
+       <% if @origin != "home" %>
+       <th>&nbsp;</th>
+       <% end %>
     </tr>
   </thead>
   <tbody>
@@ -29,6 +32,9 @@
       <td align="right"><%= "%0.2f" % [s.stock.buy_price] %></td>
       <td align="right"><%= "%0.2f" % [s.stock.sell_price] %></td>
       <td align="center"><a href="/stocks/<%= s.stock.id.to_s %>/edit?origin=<%= @origin %>">Edit</a></td>
+      <% if @origin != "home" %>
+      <td align="center"><a href="/stocks/<%= s.stock.id.to_s %>">Delete</a></td>
+      <% end %>
     </tr>
     <% end %>
   </tbody>

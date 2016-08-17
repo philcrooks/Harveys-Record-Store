@@ -1,0 +1,36 @@
+<h1>Delete Stock</h1>
+<form action="/stocks/<%= @stock.stock.id %>/delete" method="post">
+  <table>
+    <tr>
+      <td class="tab-head"><label>Artist:</label></td>
+      <td><%= @stock.artist.name %></td>
+    </tr>
+    <tr>
+      <td class="tab-head"><label>Album:</label></td>
+      <td><%= @stock.album.name %></td>
+    </tr>
+    <tr>
+      <td class="tab-head"><label>Format:</label></td>
+      <td><%= @stock.stock.format %></td>
+    </tr>
+    <tr>
+      <td class="tab-head"><label>Stock Level:</label></td>
+      <td><%= @stock.stock.stock_level.to_s %></td>
+    </tr>
+    <tr>
+      <td class="tab-head"><label>Stock Theshold:</label></td>
+      <td><%= @stock.stock.threshold.to_s %></td>
+    </tr>
+    <tr>
+      <td class="tab-head"><label>Buy For (£):</label></td>
+      <td><%= "%0.2f" % [@stock.stock.buy_price] %></td>
+    </tr>
+    <tr>
+      <td class="tab-head"><label>Sell For (£):</label></td>
+      <td><%= "%0.2f" % [@stock.stock.sell_price] %></td>
+    </tr>
+    <tr>
+      <td align="left">&nbsp;</td><td align="right"><input type="submit" class="button" value="Delete" ></td>
+    </tr>
+  </table>
+</form>
