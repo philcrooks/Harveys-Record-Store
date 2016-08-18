@@ -10,11 +10,13 @@ get '/stocks/new' do
     @album = Album.by_id(album_id)
     @artist = Artist.by_id(@album.artist_id)
     @albums = Album.by_artist(@album.artist_id)
+    @unstocked = Stock.unstocked_formats(album_id)
   else
     # This code will stop a crash but won't be very useful without an artist
     @album = EmptyAlbum.new
     @artist = EmptyArtist.new
     @albums = []
+    @unstocked = []
   end
   erb( :"stocks/new" )
 end

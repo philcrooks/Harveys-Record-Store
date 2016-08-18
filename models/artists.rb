@@ -38,6 +38,8 @@ class Artist
     @genre = options['genre']
   end
 
+  # Class methods start here
+
   def self.all()
     artists = DbInterface.select( TABLE )
     return artists.map{ |a| Artist.new( a ) }.sort
@@ -64,10 +66,6 @@ class Artist
     artists = DbInterface.select(TABLE, genre, "genre")
     return artists.map{ |a| Artist.new( a )}.sort
   end
-
-  # def self.id_range()
-  #   return DbInterface.id_range( TABLE )
-  # end
 
   def self.exists?( artist )
     sql = "SELECT COUNT(*) AS count FROM artists WHERE name = '%s'" % [artist.name.gsub("'", "''")]

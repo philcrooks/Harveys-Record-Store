@@ -21,9 +21,15 @@
       <td class="tab-head"><label for="format">Format:</label></td>
       <td>
         <select class="borderbox" name="format">
-          <option value="CD">CD</option>
-          <option value="LP">LP</option>
-          <option value="MC">MC</option>       
+          <option value="CD"
+          <% if !@unstocked.include?("CD") %>disabled
+          <% end %>>CD</option>
+          <option value="LP"
+          <% if !@unstocked.include?("LP") %>disabled
+          <% end %>>LP</option>
+          <option value="MC"
+          <% if !@unstocked.include?("MC") %>disabled
+          <% end %>>MC</option>   
         </select>
       </td>
     </tr>

@@ -102,4 +102,11 @@ class Stock
     margin = (sell_for == 0) ? 0 : (((sell_for - buy_for) * 100.0) / sell_for).round(2)
     return {level: stock_level, value: sell_for - buy_for, margin: margin }
   end
+
+  def self.unstocked_formats( album_id )
+    albums = Stock.by_album(album_id)
+    formats = albums.map{ | a | a.format }
+    return ["CD", "LP", "MC"] - formats
+  end
+
 end
