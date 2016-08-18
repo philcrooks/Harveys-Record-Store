@@ -21,7 +21,8 @@ class LinkedStock
   end
 
   def self.filter( stocks, string )
-    regex = Regexp.new(Regexp.escape(string.downcase))
-    return stocks.select { | s | regex =~ s.artist.name.downcase || regex =~ s.album.name.downcase  }
+    filter = string.downcase
+    regex = Regexp.new(Regexp.escape(filter))
+    return stocks.select { | s | regex =~ s.artist.genre || regex =~ s.artist.name.downcase || regex =~ s.album.name.downcase  }
   end
 end

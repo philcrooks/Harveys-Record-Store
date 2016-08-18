@@ -3,7 +3,7 @@
   <thead>
     <%if @origin != "home" %>
     <tr>
-      <td colspan="9" align="right">
+      <td colspan="10" align="right">
         <form action="/stocks/search" method="post">
           <input type="text" class="borderbox" size="20" name="filter_string" value="<%= @filter %>">
           <input type="submit" class="button" value="Filter" >
@@ -12,17 +12,18 @@
     </tr>
     <% end %>
     <tr>
-       <th>Artist</th>
-       <th>Album</th>
-       <th>Format</th>
-       <th>Stock Level</th>
-       <th>Threshold</th>
-       <th>Buy For (£)</th>
-       <th>Sell For (£)</th>
-       <th>&nbsp;</th>
-       <% if @origin != "home" %>
-       <th>&nbsp;</th>
-       <% end %>
+      <th>Genre</th>
+      <th>Artist</th>
+      <th>Album</th>
+      <th>Format</th>
+      <th>Stock Level</th>
+      <th>Threshold</th>
+      <th>Buy For (£)</th>
+      <th>Sell For (£)</th>
+      <th>&nbsp;</th>
+      <% if @origin != "home" %>
+      <th>&nbsp;</th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -34,6 +35,7 @@
     <% else %>
     <tr>
     <% end %>
+      <td><%= s.artist.genre.capitalize %></td>
       <td><%= s.artist.name %></td>
       <td><%= s.album.name %></td>
       <td align="center"><%= s.stock.format %></td>
