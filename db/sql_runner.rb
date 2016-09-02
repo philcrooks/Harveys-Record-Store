@@ -24,7 +24,7 @@ class SqlRunner
       db = PG.connect({ dbname: 'music_store', host: 'localhost' })
       result = db.exec( sql )
     ensure
-      db.close
+      db.close() if db
     end
     return result
   end

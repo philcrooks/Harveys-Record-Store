@@ -1,0 +1,7 @@
+The Record Store project focuses on the store inventory. On the home page, the user will see where stock is running low; items with zero stock appear with a red bckground while items with low stock (i.e. below a threshold) appear with an amber background. From this page edit the low stock entries or move on to the other pages in the system. The other pages are:
+
+1. Current Stock - a full list of all stocked items
+2. New Stock - this is where new items can be added to stock
+3. Stock Report - an analysis of the current stock
+
+The New Stock page allows Artists and Albums to be created before being put into stock. Stocked items have a format, a stock level, a threshold (if the stock level falls below this the entry appears amber on the list), a buy-price and a sell-price in addition to the album link.
